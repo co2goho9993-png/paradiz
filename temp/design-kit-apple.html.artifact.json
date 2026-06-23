@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "kind": "html",
+  "title": "DesignKit — Apple Edition",
+  "entry": "design-kit-apple.html",
+  "renderer": "html",
+  "status": "complete",
+  "exports": [
+    "html",
+    "pdf",
+    "zip"
+  ],
+  "primary": true,
+  "createdAt": "2026-06-22T09:19:45.849Z",
+  "updatedAt": "2026-06-22T09:19:45.856Z",
+  "designSystemId": "apple",
+  "metadata": {
+    "identifier": "design-kit-apple",
+    "artifactType": "text/html",
+    "inferred": false
+  }
+}

@@ -1,0 +1,15 @@
+---
+pid: 6948
+cwd: "C:\Users\ya-pa\AppData\Roaming\Open Design\namespaces\release-stable-win\data\projects\7450b712-dbf3-4cf7-965b-b4d1d1e7af79"
+command: "cd \"C:\\Users\\ya-pa\\AppData\\Roaming\\Open Design\\namespaces\\release-stable-win\\data\\projects\\7450b712-dbf3-4cf7-965b-b4d1d1e7af79\"; python -m http.server 8080"
+started_at: 2026-06-21T16:34:22.084Z
+running_for_ms: 650009   
+---
+python : �� "python" �� �ᯮ����� ��� ��� ���������, �㭪樨, 䠩�� �業��� ��� �믮��塞�� �ணࠬ��. ஢���� ��
+����쭮��� ����ᠭ�� �����, � ⠪�� ����稥 � �ࠢ��쭮��� ���, ��᫥ 祣� ������ ������.
+��ப�:1 ����:131
++ ... n\data\projects\7450b712-dbf3-4cf7-965b-b4d1d1e7af79"; python -m http ...
++                                                            ~~~~~~
+    + CategoryInfo          : ObjectNotFound: (python:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 

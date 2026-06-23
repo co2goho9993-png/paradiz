@@ -1,0 +1,237 @@
+
+======================================================
+SCREEN FRAME: Desktop - 2 (Id: 74106:6)
+Styles/Background: {"r":0.8601377606391907,"g":0.8724563121795654,"b":0.8990384340286255,"a":1}
+Bounding Box: {"x":-2061,"y":0,"width":1920,"height":1080}
+======================================================
+- [RECTANGLE] "Rectangle 1" : fills=[Solid(255, 255, 255, 1)] strokes=[] r=0 box={"x":-2061,"y":0,"width":1920,"height":60}
+- [RECTANGLE] "Rectangle 2" : fills=[Solid(48, 171, 233, 1)] strokes=[] r=10 box={"x":-322,"y":14,"width":149,"height":32}
+- [RECTANGLE] "Rectangle 9" : fills=[Solid(48, 171, 233, 1)] strokes=[] r=10 box={"x":-1449,"y":489,"width":204,"height":32}
+- [GROUP] "Group 1" : box={"x":-910,"y":14,"width":736,"height":32}
+  - [TEXT] "Трассировка" : chars="Трассировка" font=Montserrat px=18 color=rgb(86, 92, 104) box={"x":-910,"y":14,"width":178,"height":32}
+  - [TEXT] "Блобы" : chars="Блобы" font=Montserrat px=18 color=rgb(86, 92, 104) box={"x":-732,"y":14,"width":148,"height":32}
+  - [TEXT] "Волны" : chars="Волны" font=Montserrat px=18 color=rgb(86, 92, 104) box={"x":-599,"y":14,"width":148,"height":32}
+  - [TEXT] "Цвета" : chars="Цвета" font=Montserrat px=18 color=rgb(86, 92, 104) box={"x":-467,"y":14,"width":147,"height":32}
+  - [TEXT] "Регистры" : chars="Регистры" font=Montserrat px=18 color=rgb(255, 255, 255) box={"x":-322,"y":14,"width":148,"height":32}
+- [RECTANGLE] "Rectangle 6" : fills=[Solid(255, 255, 255, 1)] strokes=[] r=20 box={"x":-1700,"y":126,"width":586,"height":339}
+- [TEXT] "Конвертер регистров" : chars="Конвертер регистров" font=Montserrat px=22 color=rgb(86, 92, 104) box={"x":-1700,"y":90,"width":411,"height":36}
+- [RECTANGLE] "Rectangle 8" : fills=[Solid(255, 255, 255, 1)] strokes=[] r=20 box={"x":-1088,"y":126,"width":586,"height":339}
+- [TEXT] "ПРЕДСТАВИЛИ МАКЕТЫ РОБОТИЗИРОВАННОЙ ТЕХНИКИ В СОВЕТЕ ФЕДЕРАЦИИ" : chars="ПРЕДСТАВИЛИ МАКЕТЫ РОБОТИЗИРОВАННОЙ ТЕХНИКИ\nВ СОВЕТЕ ФЕДЕРАЦИИ" font=Montserrat px=22 color=rgb(0, 0, 0) box={"x":-1682,"y":143,"width":550,"height":307}
+- [TEXT] "представили макеты роботизированной техники в совете федерации" : chars="представили макеты роботизированной техники в совете федерации" font=Montserrat px=22 color=rgb(0, 0, 0) box={"x":-1069,"y":143,"width":550,"height":307}
+- [GROUP] "Group 8" : box={"x":-2061,"y":0,"width":410,"height":60}
+  - [TEXT] "параdiz" : chars="параdiz" font=Montserrat px=33 color=rgb(48, 171, 233) box={"x":-1946,"y":12,"width":295,"height":37}
+  - [FRAME] "Frame 1" : box={"x":-2061,"y":0,"width":120,"height":60}
+    - [ELLIPSE] "Ellipse 3" : fills=[Solid(48, 171, 233, 0.3700000047683716)] strokes=[] r=0 box={"x":-2088,"y":-37,"width":131,"height":131}
+    - [ELLIPSE] "Ellipse 1" : fills=[Solid(48, 171, 233, 1)] strokes=[] r=0 box={"x":-2080,"y":-8,"width":73,"height":73}
+    - [ELLIPSE] "Ellipse 2" : fills=[Solid(48, 171, 233, 0.5899999737739563)] strokes=[] r=0 box={"x":-2073,"y":-15,"width":87,"height":87}
+
+======================================================
+SCREEN FRAME: Desktop - 3 (Id: 74106:18)
+Styles/Background: {"r":0.8601377606391907,"g":0.8724563121795654,"b":0.8990384340286255,"a":1}
+Bounding Box: {"x":-4122,"y":0,"width":1920,"height":1080}
+======================================================
+- [RECTANGLE] "Rectangle 1" : fills=[Solid(255, 255, 255, 1)] strokes=[] r=0 box={"x":-4122,"y":0,"width":1920,"height":60}
+- [RECTANGLE] "Rectangle 2" : fills=[Solid(48, 171, 233, 1)] strokes=[] r=10 box={"x":-2522,"y":14,"width":135,"height":32}
+- [GROUP] "Group 1" : box={"x":-2971,"y":14,"width":736,"height":32}
+  - [TEXT] "Трассировка" : chars="Трассировка" font=Montserrat px=18 color=rgb(86, 92, 104) box={"x":-2971,"y":14,"width":178,"height":32}
+  - [TEXT] "Блобы" : chars="Блобы" font=Montserrat px=18 color=rgb(86, 92, 104) box={"x":-2793,"y":14,"width":148,"height":32}
+  - [TEXT] "Волны" : chars="Волны" font=Montserrat px=18 color=rgb(86, 92, 104) box={"x":-2660,"y":14,"width":148,"height":32}
+  - [TEXT] "Цвета" : chars="Цвета" font=Montserrat px=18 color=rgb(255, 255, 255) box={"x":-2528,"y":14,"width":147,"height":32}
+  - [TEXT] "Регистры" : chars="Регистры" font=Montserrat px=18 color=rgb(86, 92, 104) box={"x":-2383,"y":14,"width":148,"height":32}
+- [RECTANGLE] "Rectangle 3" : fills=[Solid(255, 255, 255, 1)] strokes=[] r=20 box={"x":-4107,"y":75,"width":331,"height":989}
+- [RECTANGLE] "Rectangle 4" : fills=[Solid(255, 255, 255, 1)] strokes=[] r=20 box={"x":-2548,"y":75,"width":331,"height":989}
+- [RECTANGLE] "Rectangle 5" : fills=[Solid(255, 255, 255, 1)] strokes=[] r=20 box={"x":-3761,"y":75,"width":1198,"height":989}
+- [TEXT] "Параметры" : chars="Параметры" font=Montserrat px=22 color=rgb(162, 170, 189) box={"x":-4086,"y":90,"width":294,"height":36}
+- [TEXT] "просмотр" : chars="просмотр" font=Montserrat px=22 color=rgb(162, 170, 189) box={"x":-3740,"y":90,"width":294,"height":36}
+- [TEXT] "svg-код" : chars="svg-код" font=Montserrat px=22 color=rgb(162, 170, 189) box={"x":-2527,"y":90,"width":294,"height":36}
+- [GROUP] "Group 8" : box={"x":-4122,"y":0,"width":410,"height":60}
+  - [TEXT] "параdiz" : chars="параdiz" font=Montserrat px=33 color=rgb(48, 171, 233) box={"x":-4007,"y":12,"width":295,"height":37}
+  - [FRAME] "Frame 1" : box={"x":-4122,"y":0,"width":120,"height":60}
+    - [ELLIPSE] "Ellipse 3" : fills=[Solid(48, 171, 233, 0.3700000047683716)] strokes=[] r=0 box={"x":-4149,"y":-37,"width":131,"height":131}
+    - [ELLIPSE] "Ellipse 1" : fills=[Solid(48, 171, 233, 1)] strokes=[] r=0 box={"x":-4141,"y":-8,"width":73,"height":73}
+    - [ELLIPSE] "Ellipse 2" : fills=[Solid(48, 171, 233, 0.5899999737739563)] strokes=[] r=0 box={"x":-4134,"y":-15,"width":87,"height":87}
+- [GROUP] "Group 4" : box={"x":-4086,"y":144,"width":294,"height":103}
+  - [TEXT] "rgb 160 196 208" : chars="rgb     160  196  208" font=Montserrat px=17 color=rgb(86, 92, 104) box={"x":-4086,"y":195,"width":294,"height":24}
+  - [TEXT] "CMYK 37 12 14 0" : chars="CMYK   37  12  14  0" font=Montserrat px=17 color=rgb(86, 92, 104) box={"x":-4086,"y":223,"width":294,"height":24}
+  - [RECTANGLE] "Rectangle 7" : fills=[Solid(160, 196, 208, 1)] strokes=[] r=10 box={"x":-4086,"y":144,"width":288,"height":39}
+  - [TEXT] "#A0C4D0" : chars="#A0C4D0" font=Montserrat px=17 color=rgb(255, 255, 255) box={"x":-4086,"y":151,"width":288,"height":24}
+
+======================================================
+SCREEN FRAME: Desktop - 4 (Id: 74106:30)
+Styles/Background: {"r":0.8601377606391907,"g":0.8724563121795654,"b":0.8990384340286255,"a":1}
+Bounding Box: {"x":0,"y":-1218,"width":1920,"height":1080}
+======================================================
+- [RECTANGLE] "Rectangle 1" : fills=[Solid(255, 255, 255, 1)] strokes=[] r=0 box={"x":0,"y":-1218,"width":1920,"height":60}
+- [RECTANGLE] "Rectangle 2" : fills=[Solid(48, 171, 233, 1)] strokes=[] r=10 box={"x":1470,"y":-1204,"width":135,"height":32}
+- [GROUP] "Group 1" : box={"x":1151,"y":-1204,"width":736,"height":32}
+  - [TEXT] "Трассировка" : chars="Трассировка" font=Montserrat px=18 color=rgb(86, 92, 104) box={"x":1151,"y":-1204,"width":178,"height":32}
+  - [TEXT] "Блобы" : chars="Блобы" font=Montserrat px=18 color=rgb(86, 92, 104) box={"x":1329,"y":-1204,"width":148,"height":32}
+  - [TEXT] "Волны" : chars="Волны" font=Montserrat px=18 color=rgb(255, 255, 255) box={"x":1462,"y":-1204,"width":148,"height":32}
+  - [TEXT] "Цвета" : chars="Цвета" font=Montserrat px=18 color=rgb(86, 92, 104) box={"x":1594,"y":-1204,"width":147,"height":32}
+  - [TEXT] "Регистры" : chars="Регистры" font=Montserrat px=18 color=rgb(86, 92, 104) box={"x":1739,"y":-1204,"width":148,"height":32}
+- [RECTANGLE] "Rectangle 3" : fills=[Solid(255, 255, 255, 1)] strokes=[] r=20 box={"x":15,"y":-1143,"width":331,"height":989}
+- [RECTANGLE] "Rectangle 4" : fills=[Solid(255, 255, 255, 1)] strokes=[] r=20 box={"x":1574,"y":-1143,"width":331,"height":989}
+- [RECTANGLE] "Rectangle 5" : fills=[Solid(255, 255, 255, 1)] strokes=[] r=20 box={"x":361,"y":-1143,"width":1198,"height":989}
+- [GROUP] "Group 2" : box={"x":361,"y":-998,"width":1198,"height":513}
+  - [FRAME] "wave 1" : box={"x":361,"y":-998,"width":1198,"height":320}
+    - [VECTOR] "Vector" : fills=[Solid(160, 196, 208, 1)] strokes=[] r=0 box={"x":361,"y":-838.2881469726562,"width":1198,"height":160.2881622314453}
+  - [RECTANGLE] "Rectangle 6" : fills=[Solid(160, 196, 208, 1)] strokes=[] r=0 box={"x":361,"y":-678,"width":1198,"height":193}
+- [TEXT] "Параметры" : chars="Параметры" font=Montserrat px=22 color=rgb(162, 170, 189) box={"x":36,"y":-1128,"width":294,"height":36}
+- [TEXT] "просмотр" : chars="просмотр" font=Montserrat px=22 color=rgb(162, 170, 189) box={"x":382,"y":-1128,"width":294,"height":36}
+- [TEXT] "svg-код" : chars="svg-код" font=Montserrat px=22 color=rgb(162, 170, 189) box={"x":1595,"y":-1128,"width":294,"height":36}
+- [RECTANGLE] "Rectangle 6" : fills=[Solid(162, 170, 189, 1)] strokes=[] r=20 box={"x":1589,"y":-1074,"width":301,"height":171}
+- [GROUP] "Group 8" : box={"x":0,"y":-1218,"width":410,"height":60}
+  - [TEXT] "параdiz" : chars="параdiz" font=Montserrat px=33 color=rgb(48, 171, 233) box={"x":115,"y":-1206,"width":295,"height":37}
+  - [FRAME] "Frame 1" : box={"x":0,"y":-1218,"width":120,"height":60}
+    - [ELLIPSE] "Ellipse 3" : fills=[Solid(48, 171, 233, 0.3700000047683716)] strokes=[] r=0 box={"x":-27,"y":-1255,"width":131,"height":131}
+    - [ELLIPSE] "Ellipse 1" : fills=[Solid(48, 171, 233, 1)] strokes=[] r=0 box={"x":-19,"y":-1226,"width":73,"height":73}
+    - [ELLIPSE] "Ellipse 2" : fills=[Solid(48, 171, 233, 0.5899999737739563)] strokes=[] r=0 box={"x":-12,"y":-1233,"width":87,"height":87}
+- [RECTANGLE] "Rectangle 12" : fills=[Solid(237, 237, 241, 1)] strokes=[] r=20 box={"x":36,"y":-753,"width":288,"height":10}
+- [RECTANGLE] "Rectangle 13" : fills=[Solid(48, 171, 233, 1)] strokes=[] r=20 box={"x":36,"y":-753,"width":193,"height":10}
+- [ELLIPSE] "Ellipse 2" : fills=[Solid(48, 171, 233, 1)] strokes=[] r=0 box={"x":215,"y":-759,"width":22,"height":22}
+- [RECTANGLE] "Rectangle 12" : fills=[Solid(237, 237, 241, 1)] strokes=[] r=20 box={"x":36,"y":-678,"width":288,"height":10}
+- [RECTANGLE] "Rectangle 13" : fills=[Solid(48, 171, 233, 1)] strokes=[] r=20 box={"x":36,"y":-678,"width":233,"height":10}
+- [ELLIPSE] "Ellipse 2" : fills=[Solid(48, 171, 233, 1)] strokes=[] r=0 box={"x":258,"y":-684,"width":22,"height":22}
+- [GROUP] "Group 9" : box={"x":89,"y":-560,"width":172,"height":32}
+  - [RECTANGLE] "Rectangle 9" : fills=[Solid(48, 171, 233, 1)] strokes=[] r=10 box={"x":89,"y":-560,"width":172,"height":32}
+  - [TEXT] "скачать svg" : chars="скачать svg" font=Montserrat px=18 color=rgb(255, 255, 255) box={"x":108,"y":-555,"width":135,"height":22}
+- [GROUP] "Group 12" : box={"x":83,"y":-624,"width":184,"height":32}
+  - [RECTANGLE] "Rectangle 9" : fills=[Solid(162, 170, 189, 1)] strokes=[] r=10 box={"x":83,"y":-624,"width":184,"height":32}
+  - [TEXT] "случайная" : chars="случайная" font=Montserrat px=18 color=rgb(255, 255, 255) box={"x":128,"y":-619,"width":135,"height":22}
+- [GROUP] "Group 11" : box={"x":36,"y":-941,"width":288,"height":48}
+  - [RECTANGLE] "Rectangle 19" : fills=[Solid(48, 171, 233, 1)] strokes=[] r=20 box={"x":36,"y":-903,"width":87,"height":10}
+  - [RECTANGLE] "Rectangle 17" : fills=[Solid(237, 237, 241, 1)] strokes=[] r=20 box={"x":237,"y":-903,"width":87,"height":10}
+  - [RECTANGLE] "Rectangle 18" : fills=[Solid(237, 237, 241, 1)] strokes=[] r=20 box={"x":137,"y":-903,"width":87,"height":10}
+  - [TEXT] "Волна" : chars="Волна" font=Montserrat px=20 color=rgb(162, 170, 189) box={"x":36,"y":-941,"width":83,"height":33}
+  - [TEXT] "Ступени" : chars="Ступени" font=Montserrat px=20 color=rgb(162, 170, 189) box={"x":134,"y":-941,"width":93,"height":33}
+  - [TEXT] "Пики" : chars="Пики" font=Montserrat px=20 color=rgb(162, 170, 189) box={"x":241,"y":-941,"width":83,"height":33}
+- [TEXT] "Прозрачность" : chars="Прозрачность" font=Montserrat px=20 color=rgb(162, 170, 189) box={"x":36,"y":-716,"width":177,"height":33}
+- [TEXT] "89 %" : chars="89 %" font=Montserrat px=20 color=rgb(86, 92, 104) box={"x":190,"y":-716,"width":130,"height":33}
+- [GROUP] "Group 4" : box={"x":36,"y":-1074,"width":294,"height":103}
+  - [TEXT] "rgb 160 196 208" : chars="rgb     160  196  208" font=Montserrat px=17 color=rgb(86, 92, 104) box={"x":36,"y":-1023,"width":294,"height":24}
+  - [TEXT] "CMYK 37 12 14 0" : chars="CMYK   37  12  14  0" font=Montserrat px=17 color=rgb(86, 92, 104) box={"x":36,"y":-995,"width":294,"height":24}
+  - [RECTANGLE] "Rectangle 7" : fills=[Solid(160, 196, 208, 1)] strokes=[] r=10 box={"x":36,"y":-1074,"width":288,"height":39}
+  - [TEXT] "#A0C4D0" : chars="#A0C4D0" font=Montserrat px=17 color=rgb(255, 255, 255) box={"x":36,"y":-1067,"width":288,"height":24}
+- [TEXT] "<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" shape-rendering="geometricPrecision"><path fill="#0071e3" fill-opacity="1"/svg>" : chars="<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" shape-rendering="geometricPrecision"><path fill="#0071e3" fill-opacity="1"/svg>" font=Montserrat px=17 color=rgb(255, 255, 255) box={"x":1607,"y":-1059,"width":273,"height":145}
+- [RECTANGLE] "Rectangle 17" : fills=[Solid(48, 171, 233, 1)] strokes=[] r=20 box={"x":36,"y":-828,"width":139,"height":10}
+- [RECTANGLE] "Rectangle 14" : fills=[Solid(237, 237, 241, 1)] strokes=[] r=20 box={"x":185,"y":-828,"width":139,"height":10}
+- [TEXT] "Вверх" : chars="Вверх" font=Montserrat px=20 color=rgb(162, 170, 189) box={"x":36,"y":-866,"width":138,"height":33}
+- [TEXT] "Вниз" : chars="Вниз" font=Montserrat px=20 color=rgb(162, 170, 189) box={"x":209,"y":-866,"width":111,"height":33}
+- [TEXT] "Реже" : chars="Реже" font=Montserrat px=20 color=rgb(162, 170, 189) box={"x":36,"y":-791,"width":138,"height":33}
+- [TEXT] "Чаще" : chars="Чаще" font=Montserrat px=20 color=rgb(162, 170, 189) box={"x":209,"y":-791,"width":111,"height":33}
+- [FRAME] "dice-solid-svgrepo-com 1" : box={"x":93,"y":-621,"width":26,"height":26}
+  - [VECTOR] "Vector" : fills=[Solid(255, 255, 255, 0.5)] strokes=[] r=0 box={"x":93,"y":-620.1875,"width":26,"height":22.75}
+
+======================================================
+SCREEN FRAME: Desktop - 5 (Id: 74106:42)
+Styles/Background: {"r":0.8601377606391907,"g":0.8724563121795654,"b":0.8990384340286255,"a":1}
+Bounding Box: {"x":-2061,"y":-1218,"width":1920,"height":1080}
+======================================================
+- [RECTANGLE] "Rectangle 1" : fills=[Solid(255, 255, 255, 1)] strokes=[] r=0 box={"x":-2061,"y":-1218,"width":1920,"height":60}
+- [RECTANGLE] "Rectangle 2" : fills=[Solid(48, 171, 233, 1)] strokes=[] r=10 box={"x":-725,"y":-1204,"width":135,"height":32}
+- [GROUP] "Group 1" : box={"x":-910,"y":-1204,"width":736,"height":32}
+  - [TEXT] "Трассировка" : chars="Трассировка" font=Montserrat px=18 color=rgb(86, 92, 104) box={"x":-910,"y":-1204,"width":178,"height":32}
+  - [TEXT] "Блобы" : chars="Блобы" font=Montserrat px=18 color=rgb(255, 255, 255) box={"x":-732,"y":-1204,"width":148,"height":32}
+  - [TEXT] "Волны" : chars="Волны" font=Montserrat px=18 color=rgb(86, 92, 104) box={"x":-599,"y":-1204,"width":148,"height":32}
+  - [TEXT] "Цвета" : chars="Цвета" font=Montserrat px=18 color=rgb(86, 92, 104) box={"x":-467,"y":-1204,"width":147,"height":32}
+  - [TEXT] "Регистры" : chars="Регистры" font=Montserrat px=18 color=rgb(86, 92, 104) box={"x":-322,"y":-1204,"width":148,"height":32}
+- [RECTANGLE] "Rectangle 3" : fills=[Solid(255, 255, 255, 1)] strokes=[] r=20 box={"x":-2046,"y":-1143,"width":331,"height":989}
+- [RECTANGLE] "Rectangle 4" : fills=[Solid(255, 255, 255, 1)] strokes=[] r=20 box={"x":-487,"y":-1143,"width":331,"height":989}
+- [RECTANGLE] "Rectangle 6" : fills=[Solid(162, 170, 189, 1)] strokes=[] r=20 box={"x":-472,"y":-1074,"width":301,"height":171}
+- [RECTANGLE] "Rectangle 5" : fills=[Solid(255, 255, 255, 1)] strokes=[] r=20 box={"x":-1700,"y":-1143,"width":1198,"height":989}
+- [TEXT] "Параметры" : chars="Параметры" font=Montserrat px=22 color=rgb(162, 170, 189) box={"x":-2025,"y":-1128,"width":294,"height":36}
+- [TEXT] "просмотр" : chars="просмотр" font=Montserrat px=22 color=rgb(162, 170, 189) box={"x":-1679,"y":-1128,"width":294,"height":36}
+- [TEXT] "svg-код" : chars="svg-код" font=Montserrat px=22 color=rgb(162, 170, 189) box={"x":-466,"y":-1128,"width":294,"height":36}
+- [VECTOR] "Vector" : fills=[Solid(160, 196, 208, 1)] strokes=[] r=0 box={"x":-1344,"y":-916,"width":487,"height":535}
+- [GROUP] "Group 4" : box={"x":-2025,"y":-1074,"width":294,"height":103}
+  - [TEXT] "rgb 160 196 208" : chars="rgb     160  196  208" font=Montserrat px=17 color=rgb(86, 92, 104) box={"x":-2025,"y":-1023,"width":294,"height":24}
+  - [TEXT] "CMYK 37 12 14 0" : chars="CMYK   37  12  14  0" font=Montserrat px=17 color=rgb(86, 92, 104) box={"x":-2025,"y":-995,"width":294,"height":24}
+  - [RECTANGLE] "Rectangle 7" : fills=[Solid(160, 196, 208, 1)] strokes=[] r=10 box={"x":-2025,"y":-1074,"width":288,"height":39}
+  - [TEXT] "#A0C4D0" : chars="#A0C4D0" font=Montserrat px=17 color=rgb(255, 255, 255) box={"x":-2025,"y":-1067,"width":288,"height":24}
+- [GROUP] "Group 8" : box={"x":-2061,"y":-1218,"width":410,"height":60}
+  - [TEXT] "параdiz" : chars="параdiz" font=Montserrat px=33 color=rgb(48, 171, 233) box={"x":-1946,"y":-1206,"width":295,"height":37}
+  - [FRAME] "Frame 1" : box={"x":-2061,"y":-1218,"width":120,"height":60}
+    - [ELLIPSE] "Ellipse 3" : fills=[Solid(48, 171, 233, 0.3700000047683716)] strokes=[] r=0 box={"x":-2088,"y":-1255,"width":131,"height":131}
+    - [ELLIPSE] "Ellipse 1" : fills=[Solid(48, 171, 233, 1)] strokes=[] r=0 box={"x":-2080,"y":-1226,"width":73,"height":73}
+    - [ELLIPSE] "Ellipse 2" : fills=[Solid(48, 171, 233, 0.5899999737739563)] strokes=[] r=0 box={"x":-2073,"y":-1233,"width":87,"height":87}
+- [TEXT] "<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" shape-rendering="geometricPrecision"><path fill="#0071e3" fill-opacity="1"/svg>" : chars="<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" shape-rendering="geometricPrecision"><path fill="#0071e3" fill-opacity="1"/svg>" font=Montserrat px=17 color=rgb(255, 255, 255) box={"x":-454,"y":-1059,"width":273,"height":145}
+- [RECTANGLE] "Rectangle 14" : fills=[Solid(237, 237, 241, 1)] strokes=[] r=20 box={"x":-2025,"y":-894,"width":288,"height":10}
+- [RECTANGLE] "Rectangle 15" : fills=[Solid(48, 171, 233, 1)] strokes=[] r=20 box={"x":-2025,"y":-894,"width":101,"height":10}
+- [ELLIPSE] "Ellipse 3" : fills=[Solid(48, 171, 233, 1)] strokes=[] r=0 box={"x":-1940,"y":-900,"width":22,"height":22}
+- [RECTANGLE] "Rectangle 12" : fills=[Solid(237, 237, 241, 1)] strokes=[] r=20 box={"x":-2025,"y":-819,"width":288,"height":10}
+- [RECTANGLE] "Rectangle 13" : fills=[Solid(48, 171, 233, 1)] strokes=[] r=20 box={"x":-2025,"y":-819,"width":233,"height":10}
+- [ELLIPSE] "Ellipse 2" : fills=[Solid(48, 171, 233, 1)] strokes=[] r=0 box={"x":-1803,"y":-825,"width":22,"height":22}
+- [GROUP] "Group 9" : box={"x":-1972,"y":-701,"width":172,"height":32}
+  - [RECTANGLE] "Rectangle 9" : fills=[Solid(48, 171, 233, 1)] strokes=[] r=10 box={"x":-1972,"y":-701,"width":172,"height":32}
+  - [TEXT] "скачать svg" : chars="скачать svg" font=Montserrat px=18 color=rgb(255, 255, 255) box={"x":-1953,"y":-696,"width":135,"height":22}
+- [GROUP] "Group 12" : box={"x":-1978,"y":-765,"width":184,"height":32}
+  - [RECTANGLE] "Rectangle 9" : fills=[Solid(162, 170, 189, 1)] strokes=[] r=10 box={"x":-1978,"y":-765,"width":184,"height":32}
+  - [TEXT] "случайная" : chars="случайная" font=Montserrat px=18 color=rgb(255, 255, 255) box={"x":-1933,"y":-760,"width":135,"height":22}
+- [TEXT] "Проще" : chars="Проще" font=Montserrat px=20 color=rgb(162, 170, 189) box={"x":-2025,"y":-932,"width":138,"height":33}
+- [TEXT] "Сложнее" : chars="Сложнее" font=Montserrat px=20 color=rgb(162, 170, 189) box={"x":-1852,"y":-932,"width":111,"height":33}
+- [FRAME] "dice-solid-svgrepo-com 1" : box={"x":-1968,"y":-762,"width":26,"height":26}
+  - [VECTOR] "Vector" : fills=[Solid(255, 255, 255, 0.5)] strokes=[] r=0 box={"x":-1968,"y":-761.1875,"width":26,"height":22.75}
+- [TEXT] "Глаже" : chars="Глаже" font=Montserrat px=20 color=rgb(162, 170, 189) box={"x":-2025,"y":-857,"width":138,"height":33}
+- [TEXT] "Острее" : chars="Острее" font=Montserrat px=20 color=rgb(162, 170, 189) box={"x":-1852,"y":-857,"width":111,"height":33}
+
+======================================================
+SCREEN FRAME: Desktop - 6 (Id: 74106:54)
+Styles/Background: {"r":0.8601377606391907,"g":0.8724563121795654,"b":0.8990384340286255,"a":1}
+Bounding Box: {"x":-4122,"y":-1218,"width":1920,"height":1080}
+======================================================
+- [RECTANGLE] "Rectangle 1" : fills=[Solid(255, 255, 255, 1)] strokes=[] r=0 box={"x":-4122,"y":-1218,"width":1920,"height":60}
+- [RECTANGLE] "Rectangle 2" : fills=[Solid(48, 171, 233, 1)] strokes=[] r=10 box={"x":-2977,"y":-1204,"width":191,"height":32}
+- [GROUP] "Group 1" : box={"x":-2971,"y":-1204,"width":736,"height":32}
+  - [TEXT] "Трассировка" : chars="Трассировка" font=Montserrat px=18 color=rgb(255, 255, 255) box={"x":-2971,"y":-1204,"width":178,"height":32}
+  - [TEXT] "Блобы" : chars="Блобы" font=Montserrat px=18 color=rgb(86, 92, 104) box={"x":-2793,"y":-1204,"width":148,"height":32}
+  - [TEXT] "Волны" : chars="Волны" font=Montserrat px=18 color=rgb(86, 92, 104) box={"x":-2660,"y":-1204,"width":148,"height":32}
+  - [TEXT] "Цвета" : chars="Цвета" font=Montserrat px=18 color=rgb(86, 92, 104) box={"x":-2528,"y":-1204,"width":147,"height":32}
+  - [TEXT] "Регистры" : chars="Регистры" font=Montserrat px=18 color=rgb(86, 92, 104) box={"x":-2383,"y":-1204,"width":148,"height":32}
+- [RECTANGLE] "Rectangle 3" : fills=[Solid(255, 255, 255, 1)] strokes=[] r=20 box={"x":-4107,"y":-1143,"width":331,"height":989}
+- [RECTANGLE] "Rectangle 6" : fills=[Solid(255, 255, 255, 1)] strokes=[Solid(219, 222, 229)] r=10 box={"x":-4086,"y":-1082,"width":288,"height":139}
+- [RECTANGLE] "Rectangle 7" : fills=[Solid(255, 255, 255, 1)] strokes=[Solid(219, 222, 229)] r=10 box={"x":-4086,"y":-923,"width":288,"height":174}
+- [RECTANGLE] "Rectangle 4" : fills=[Solid(255, 255, 255, 1)] strokes=[] r=20 box={"x":-2548,"y":-1143,"width":331,"height":989}
+- [RECTANGLE] "Rectangle 5" : fills=[Solid(255, 255, 255, 1)] strokes=[] r=20 box={"x":-3761,"y":-1143,"width":1198,"height":989}
+- [TEXT] "Параметры" : chars="Параметры" font=Montserrat px=22 color=rgb(162, 170, 189) box={"x":-4086,"y":-1128,"width":294,"height":36}
+- [TEXT] "просмотр" : chars="просмотр" font=Montserrat px=22 color=rgb(162, 170, 189) box={"x":-3740,"y":-1128,"width":294,"height":36}
+- [TEXT] "svg-код" : chars="svg-код" font=Montserrat px=22 color=rgb(162, 170, 189) box={"x":-2527,"y":-1128,"width":294,"height":36}
+- [RECTANGLE] "image 2" : fills=[IMAGE] strokes=[] r=0 box={"x":-3476,"y":-976,"width":629,"height":652}
+- [RECTANGLE] "image 3" : fills=[IMAGE] strokes=[] r=0 box={"x":-3990,"y":-900,"width":97,"height":100}
+- [GROUP] "Group 7" : box={"x":-3214,"y":-1048,"width":28,"height":809}
+  - [LINE] "Line 2" : 
+  - [GROUP] "Group 6" : box={"x":-3214,"y":-683.7188720703125,"width":28,"height":70.26742553710938}
+    - [RECTANGLE] "Rectangle 10" : fills=[Solid(48, 171, 233, 1)] strokes=[] r=40 box={"x":-3214,"y":-683.7188720703125,"width":28,"height":70.26742553710938}
+    - [GROUP] "Group 5" : box={"x":-3208.4443359375,"y":-665.3154907226562,"width":16.88888931274414,"height":33.460636138916016}
+      - [LINE] "Line 3" : 
+      - [LINE] "Line 4" : 
+      - [LINE] "Line 5" : 
+      - [LINE] "Line 6" : 
+      - [LINE] "Line 7" : 
+- [RECTANGLE] "Rectangle 11" : fills=[Solid(162, 170, 189, 1)] strokes=[] r=20 box={"x":-2533,"y":-1074,"width":301,"height":171}
+- [GROUP] "Group 8" : box={"x":-4122,"y":-1218,"width":410,"height":60}
+  - [TEXT] "параdiz" : chars="параdiz" font=Montserrat px=33 color=rgb(48, 171, 233) box={"x":-4007,"y":-1206,"width":295,"height":37}
+  - [FRAME] "Frame 1" : box={"x":-4122,"y":-1218,"width":120,"height":60}
+    - [ELLIPSE] "Ellipse 3" : fills=[Solid(48, 171, 233, 0.3700000047683716)] strokes=[] r=0 box={"x":-4149,"y":-1255,"width":131,"height":131}
+    - [ELLIPSE] "Ellipse 1" : fills=[Solid(48, 171, 233, 1)] strokes=[] r=0 box={"x":-4141,"y":-1226,"width":73,"height":73}
+    - [ELLIPSE] "Ellipse 2" : fills=[Solid(48, 171, 233, 0.5899999737739563)] strokes=[] r=0 box={"x":-4134,"y":-1233,"width":87,"height":87}
+- [GROUP] "Group 10" : box={"x":-4086,"y":-678,"width":288,"height":391}
+  - [RECTANGLE] "Rectangle 13" : fills=[Solid(48, 171, 233, 1)] strokes=[] r=20 box={"x":-4086,"y":-678,"width":139,"height":10}
+  - [RECTANGLE] "Rectangle 14" : fills=[Solid(237, 237, 241, 1)] strokes=[] r=20 box={"x":-3937,"y":-678,"width":139,"height":10}
+  - [RECTANGLE] "Rectangle 12" : fills=[Solid(237, 237, 241, 1)] strokes=[] r=20 box={"x":-4086,"y":-603,"width":288,"height":10}
+  - [RECTANGLE] "Rectangle 13" : fills=[Solid(48, 171, 233, 1)] strokes=[] r=20 box={"x":-4086,"y":-603,"width":123,"height":10}
+  - [ELLIPSE] "Ellipse 2" : fills=[Solid(48, 171, 233, 1)] strokes=[] r=0 box={"x":-3977,"y":-609,"width":22,"height":22}
+  - [RECTANGLE] "Rectangle 12" : fills=[Solid(237, 237, 241, 1)] strokes=[] r=20 box={"x":-4086,"y":-528,"width":288,"height":10}
+  - [RECTANGLE] "Rectangle 13" : fills=[Solid(48, 171, 233, 1)] strokes=[] r=20 box={"x":-4086,"y":-528,"width":193,"height":10}
+  - [ELLIPSE] "Ellipse 2" : fills=[Solid(48, 171, 233, 1)] strokes=[] r=0 box={"x":-3907,"y":-534,"width":22,"height":22}
+  - [RECTANGLE] "Rectangle 12" : fills=[Solid(237, 237, 241, 1)] strokes=[] r=20 box={"x":-4086,"y":-453,"width":288,"height":10}
+  - [RECTANGLE] "Rectangle 13" : fills=[Solid(48, 171, 233, 1)] strokes=[] r=20 box={"x":-4086,"y":-453,"width":233,"height":10}
+  - [ELLIPSE] "Ellipse 2" : fills=[Solid(48, 171, 233, 1)] strokes=[] r=0 box={"x":-3864,"y":-459,"width":22,"height":22}
+  - [RECTANGLE] "Rectangle 15" : fills=[Solid(237, 237, 241, 1)] strokes=[] r=20 box={"x":-4086,"y":-378,"width":288,"height":10}
+  - [RECTANGLE] "Rectangle 16" : fills=[Solid(48, 171, 233, 1)] strokes=[] r=20 box={"x":-4086,"y":-378,"width":63,"height":10}
+  - [ELLIPSE] "Ellipse 3" : fills=[Solid(48, 171, 233, 1)] strokes=[] r=0 box={"x":-4039,"y":-384,"width":22,"height":22}
+  - [GROUP] "Group 9" : box={"x":-4033,"y":-319,"width":172,"height":32}
+    - [RECTANGLE] "Rectangle 9" : fills=[Solid(48, 171, 233, 1)] strokes=[] r=10 box={"x":-4033,"y":-319,"width":172,"height":32}
+    - [TEXT] "скачать svg" : chars="скачать svg" font=Montserrat px=18 color=rgb(255, 255, 255) box={"x":-4014,"y":-314,"width":135,"height":22}
+- [TEXT] "оригинал" : chars="оригинал" font=Montserrat px=17 color=rgb(86, 92, 104) box={"x":-3740,"y":-1088,"width":294,"height":24}
+- [TEXT] "результат" : chars="результат" font=Montserrat px=17 color=rgb(86, 92, 104) box={"x":-2878,"y":-1088,"width":294,"height":24}
+- [TEXT] "<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" shape-rendering="geometricPrecision"><path fill="#0071e3" fill-opacity="1"/svg>" : chars="<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" shape-rendering="geometricPrecision"><path fill="#0071e3" fill-opacity="1"/svg>" font=Montserrat px=17 color=rgb(255, 255, 255) box={"x":-2515,"y":-1059,"width":273,"height":145}

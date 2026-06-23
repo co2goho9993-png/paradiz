@@ -1,0 +1,117 @@
+=== FRAMES ===
+Frame [74106:6] name: "Desktop - 2" box: {"x":-2061,"y":0,"width":1920,"height":1080}
+Frame [74111:414] name: "Frame 1" box: {"x":-2061,"y":0,"width":120,"height":60}
+Frame [74106:18] name: "Desktop - 3" box: {"x":-4122,"y":0,"width":1920,"height":1080}
+Frame [74111:421] name: "Frame 1" box: {"x":-4122,"y":0,"width":120,"height":60}
+Frame [74106:30] name: "Desktop - 4" box: {"x":0,"y":-1218,"width":1920,"height":1080}
+Frame [74106:66] name: "wave 1" box: {"x":361,"y":-998,"width":1198,"height":320}
+Frame [74111:407] name: "Frame 1" box: {"x":0,"y":-1218,"width":120,"height":60}
+Frame [74113:553] name: "dice-solid-svgrepo-com 1" box: {"x":93,"y":-621,"width":26,"height":26}
+Frame [74106:42] name: "Desktop - 5" box: {"x":-2061,"y":-1218,"width":1920,"height":1080}
+Frame [74107:125] name: "Frame 1" box: {"x":-2061,"y":-1218,"width":120,"height":60}
+Frame [74114:603] name: "dice-solid-svgrepo-com 1" box: {"x":-1968,"y":-762,"width":26,"height":26}
+Frame [74106:54] name: "Desktop - 6" box: {"x":-4122,"y":-1218,"width":1920,"height":1080}
+Frame [74111:400] name: "Frame 1" box: {"x":-4122,"y":-1218,"width":120,"height":60}
+
+=== ALL TEXTS ===
+[Desktop - 2] [74106:10] " ^! �!! Q! U  T �" -> characters: " ^! �!! Q! U  T �"
+[Desktop - 2] [74106:11] "  � U �!9" -> characters: "  � U �!9"
+[Desktop - 2] [74106:12] "  U � !9" -> characters: "  U � !9"
+[Desktop - 2] [74106:13] " �  �! �" -> characters: " �  �! �"
+[Desktop - 2] [74106:14] " � � V Q!!!!9" -> characters: " � � V Q!!!!9"
+[Desktop - 2] [74106:97] " Y U   �!! �! ! � V Q!!! U " -> characters: " Y U   �!! �! ! � V Q!!! U "
+[Desktop - 2] [74107:133] " _ � "   ^ R  � : �  Z R Y " ^ �  � [  [ ^ �  � � [  R \ \ [ "  ^ " � \ � Y �     [  " ^ "  � "  " � R � � �" -> characters: " _ � "   ^ R  � : �  Z R Y " ^ �  � [  [ ^ �  � � [  R \ \ [ "  ^ " � \ � Y �\n    [  " ^ "  � "  " � R � � �"
+[Desktop - 2] [74107:134] " W! � �!! �  Q � Q  X � T �!!9 ! U � U! Q � Q! U  �   U  ! �!&  Q T Q   ! U  �! � ! � � �! �!  Q Q" -> characters: " W! � �!! �  Q � Q  X � T �!!9 ! U � U! Q � Q! U  �   U  ! �!&  Q T Q   ! U  �! � ! � � �! �!  Q Q"
+[Desktop - 2] [74111:413] " W �! �diz" -> characters: " W �! �diz"
+[Desktop - 3] [74106:22] " ^! �!! Q! U  T �" -> characters: " ^! �!! Q! U  T �"
+[Desktop - 3] [74106:23] "  � U �!9" -> characters: "  � U �!9"
+[Desktop - 3] [74106:24] "  U � !9" -> characters: "  U � !9"
+[Desktop - 3] [74106:25] " �  �! �" -> characters: " �  �! �"
+[Desktop - 3] [74106:26] " � � V Q!!!!9" -> characters: " � � V Q!!!!9"
+[Desktop - 3] [74106:92] " _ �! � X �!!!9" -> characters: " _ �! � X �!!!9"
+[Desktop - 3] [74106:93] " W! U! X U!!" -> characters: " W! U! X U!!"
+[Desktop - 3] [74106:94] "svg- T U �" -> characters: "svg- T U �"
+[Desktop - 3] [74111:420] " W �! �diz" -> characters: " W �! �diz"
+[Desktop - 3] [74113:508] "rgb 160 196 208" -> characters: "rgb     160  196  208"
+[Desktop - 3] [74113:509] "CMYK 37 12 14 0" -> characters: "CMYK   37  12  14  0"
+[Desktop - 3] [74113:511] "#A0C4D0" -> characters: "#A0C4D0"
+[Desktop - 4] [74106:34] " ^! �!! Q! U  T �" -> characters: " ^! �!! Q! U  T �"
+[Desktop - 4] [74106:35] "  � U �!9" -> characters: "  � U �!9"
+[Desktop - 4] [74106:36] "  U � !9" -> characters: "  U � !9"
+[Desktop - 4] [74106:37] " �  �! �" -> characters: " �  �! �"
+[Desktop - 4] [74106:38] " � � V Q!!!!9" -> characters: " � � V Q!!!!9"
+[Desktop - 4] [74106:84] " _ �! � X �!!!9" -> characters: " _ �! � X �!!!9"
+[Desktop - 4] [74106:85] " W! U! X U!!" -> characters: " W! U! X U!!"
+[Desktop - 4] [74106:86] "svg- T U �" -> characters: "svg- T U �"
+[Desktop - 4] [74111:406] " W �! �diz" -> characters: " W �! �diz"
+[Desktop - 4] [74112:488] "! T �!! �!!
+ svg" -> characters: "! T �!! �!!\n svg"
+[Desktop - 4] [74113:560] "! �!S!! �   �!" -> characters: "! �!S!! �   �!"
+[Desktop - 4] [74113:531] "  U �  �" -> characters: "  U �  �"
+[Desktop - 4] [74113:534] " !!S W �  Q" -> characters: " !!S W �  Q"
+[Desktop - 4] [74113:532] " _ Q T Q" -> characters: " _ Q T Q"
+[Desktop - 4] [74112:494] " _! U �! �!!  U!!!
+" -> characters: " _! U �! �!!  U!!!\n"
+[Desktop - 4] [74112:497] "89 %" -> characters: "89 %"
+[Desktop - 4] [74112:502] "rgb 160 196 208" -> characters: "rgb     160  196  208"
+[Desktop - 4] [74112:503] "CMYK 37 12 14 0" -> characters: "CMYK   37  12  14  0"
+[Desktop - 4] [74112:505] "#A0C4D0" -> characters: "#A0C4D0"
+[Desktop - 4] [74113:522] "<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" shape-rendering="geometricPrecision"><path fill="#0071e3" fill-opacity="1"/svg>" -> characters: "<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" shape-rendering="geometricPrecision"><path fill="#0071e3" fill-opacity="1"/svg>"
+[Desktop - 4] [74113:542] "   �!!&" -> characters: "   �!!&"
+[Desktop - 4] [74113:543] "   Q �" -> characters: "   Q �"
+[Desktop - 4] [74113:547] " � � � �" -> characters: " � � � �"
+[Desktop - 4] [74113:548] " � �!0 �" -> characters: " � �!0 �"
+[Desktop - 5] [74106:46] " ^! �!! Q! U  T �" -> characters: " ^! �!! Q! U  T �"
+[Desktop - 5] [74106:47] "  � U �!9" -> characters: "  � U �!9"
+[Desktop - 5] [74106:48] "  U � !9" -> characters: "  U � !9"
+[Desktop - 5] [74106:49] " �  �! �" -> characters: " �  �! �"
+[Desktop - 5] [74106:50] " � � V Q!!!!9" -> characters: " � � V Q!!!!9"
+[Desktop - 5] [74106:72] " _ �! � X �!!!9" -> characters: " _ �! � X �!!!9"
+[Desktop - 5] [74106:81] " W! U! X U!!" -> characters: " W! U! X U!!"
+[Desktop - 5] [74106:82] "svg- T U �" -> characters: "svg- T U �"
+[Desktop - 5] [74107:107] "rgb 160 196 208" -> characters: "rgb     160  196  208"
+[Desktop - 5] [74107:109] "CMYK 37 12 14 0" -> characters: "CMYK   37  12  14  0"
+[Desktop - 5] [74107:110] "#A0C4D0" -> characters: "#A0C4D0"
+[Desktop - 5] [74107:121] " W �! �diz" -> characters: " W �! �diz"
+[Desktop - 5] [74113:520] "<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" shape-rendering="geometricPrecision"><path fill="#0071e3" fill-opacity="1"/svg>" -> characters: "<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" shape-rendering="geometricPrecision"><path fill="#0071e3" fill-opacity="1"/svg>"
+[Desktop - 5] [74114:595] "! T �!! �!!
+ svg" -> characters: "! T �!! �!!\n svg"
+[Desktop - 5] [74114:598] "! �!S!! �   �!" -> characters: "! �!S!! �   �!"
+[Desktop - 5] [74114:601] " _! U!0 �" -> characters: " _! U!0 �"
+[Desktop - 5] [74114:602] "  � U �  � �" -> characters: "  � U �  � �"
+[Desktop - 5] [74114:608] "  � � � �" -> characters: "  � � � �"
+[Desktop - 5] [74114:609] " [!!! � �" -> characters: " [!!! � �"
+[Desktop - 6] [74106:58] " ^! �!! Q! U  T �" -> characters: " ^! �!! Q! U  T �"
+[Desktop - 6] [74106:59] "  � U �!9" -> characters: "  � U �!9"
+[Desktop - 6] [74106:60] "  U � !9" -> characters: "  U � !9"
+[Desktop - 6] [74106:61] " �  �! �" -> characters: " �  �! �"
+[Desktop - 6] [74106:62] " � � V Q!!!!9" -> characters: " � � V Q!!!!9"
+[Desktop - 6] [74106:88] " _ �! � X �!!!9" -> characters: " _ �! � X �!!!9"
+[Desktop - 6] [74106:89] " W! U! X U!!" -> characters: " W! U! X U!!"
+[Desktop - 6] [74106:90] "svg- T U �" -> characters: "svg- T U �"
+[Desktop - 6] [74111:399] " W �! �diz" -> characters: " W �! �diz"
+[Desktop - 6] [74111:427] "! T �!! �!!
+ svg" -> characters: "! T �!! �!!\n svg"
+[Desktop - 6] [74112:434] " U! Q V Q  � �" -> characters: " U! Q V Q  � �"
+[Desktop - 6] [74112:436] "! � �!S �!
+! �!" -> characters: "! � �!S �!\n! �!"
+[Desktop - 6] [74113:513] "<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" shape-rendering="geometricPrecision"><path fill="#0071e3" fill-opacity="1"/svg>" -> characters: "<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" shape-rendering="geometricPrecision"><path fill="#0071e3" fill-opacity="1"/svg>"
+[] [74107:137] "  " � � \ � "  � "  �  ^ �" -> characters: "  " � � \ � "  � "  �  ^ �"
+[] [74107:138] "  Q �  Q  ! � V Q!!!" -> characters: "  Q �  Q  ! � V Q!!!"
+[] [74107:143] "  � V � �  !9 �  !S T !9" -> characters: "  � V � �  !9 �  !S T !9"
+[] [74107:144] " Q \  " �  �  ! "  �  ^ � R" -> characters: " Q \  " �  �  ! "  �  ^ � R"
+[] [74107:145] " W U  W! � � � U � �  Q! X" -> characters: " W U  W! � � � U � �  Q! X"
+[] [74111:250] "  � V!!S � Q!!
+ ! U! U" -> characters: "  � V!!S � Q!!\n ! U! U"
+[] [74111:384] "PNG, JPG, WebP � 2 W �! �! �!0 Q! � � Ctrl+V" -> characters: "PNG, JPG, WebP � 2 W �! �! �!0 Q! � � Ctrl+V"
+[] [74111:303] " � " -> characters: " � "
+[] [74111:383] " �  �!  U " -> characters: " �  �!  U "
+[] [74111:349] "Threshold" -> characters: "Threshold"
+[] [74111:360] "Paths" -> characters: "Paths"
+[] [74111:371] "Corners" -> characters: "Corners"
+[] [74111:392] "Noise" -> characters: "Noise"
+[] [74111:386] "45 %" -> characters: "45 %"
+[] [74111:388] "89 %" -> characters: "89 %"
+[] [74111:387] "67 %" -> characters: "67 %"
+[] [74111:393] "16 %" -> characters: "16 %"
+[] [74111:264] "  � X U T.png" -> characters: "  � X U T.png"

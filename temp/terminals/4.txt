@@ -1,0 +1,18 @@
+---
+pid: 16208
+cwd: "C:\Users\ya-pa\AppData\Roaming\Open Design\namespaces\release-stable-win\data\projects\7450b712-dbf3-4cf7-965b-b4d1d1e7af79"
+command: "& \"C:\\Program Files\\nodejs\\npx.cmd\" --yes serve -l 8080"
+started_at: 2026-06-21T16:34:39.267Z
+running_for_ms: 634996   
+---
+��ப�:1 ����:140
++ ... le-win\\data\\projects\\7450b712-dbf3-4cf7-965b-b4d1d1e7af79" ; & "C: ...
++                                                                  ~
+�������� ����뢠�騩 ���� ")" � ��ࠦ����.
+��ப�:1 ����:198
++ ... 1d1e7af79" ; & "C:\Program Files\nodejs\npx.cmd" --yes serve -l 8080)
++                                                                         ~
+��।�������� ���ᥬ� ")" � ��ࠦ���� ��� ������.
+    + CategoryInfo          : ParserError: (:) [], ParentContainsErrorRecordException
+    + FullyQualifiedErrorId : MissingEndParenthesisInExpression
+ 

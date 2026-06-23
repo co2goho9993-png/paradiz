@@ -1,0 +1,18 @@
+---
+pid: 17516
+cwd: "C:\Users\ya-pa\AppData\Roaming\Open Design\namespaces\release-stable-win\data\projects\7450b712-dbf3-4cf7-965b-b4d1d1e7af79"
+command: "py -m http.server 8080"
+started_at: 2026-06-21T16:34:32.136Z
+running_for_ms: 639997   
+---
+��ப�:1 ����:140
++ ... le-win\\data\\projects\\7450b712-dbf3-4cf7-965b-b4d1d1e7af79" ; py -m ...
++                                                                  ~
+�������� ����뢠�騩 ���� ")" � ��ࠦ����.
+��ப�:1 ����:165
++ ... ects\\7450b712-dbf3-4cf7-965b-b4d1d1e7af79" ; py -m http.server 8080)
++                                                                         ~
+��।�������� ���ᥬ� ")" � ��ࠦ���� ��� ������.
+    + CategoryInfo          : ParserError: (:) [], ParentContainsErrorRecordException
+    + FullyQualifiedErrorId : MissingEndParenthesisInExpression
+ 

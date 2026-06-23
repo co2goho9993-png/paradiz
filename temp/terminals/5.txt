@@ -1,0 +1,8 @@
+---
+pid: 13244
+cwd: "C:\Users\ya-pa\AppData\Roaming\Open Design\namespaces\release-stable-win\data\projects\7450b712-dbf3-4cf7-965b-b4d1d1e7af79"
+command: "$root = 'C:\\Users\\ya-pa\\AppData\\Roaming\\Open Design\\namespaces\\release-stable-win\\data\\projects\\7450b712-dbf3-4cf7-965b-b4d1d1e7af79'; $listener = New-Object System.Net.HttpListener; $listener.Prefixes.Add('http://localhost:8080/'); $listener.Start(); Write-Output 'SERVER_READY http://localhost:8080/'; while ($listener.IsListening) { $context = $listener.GetContext(); $path = $context.Request.Url.LocalPath; if ($path -eq '/') { $path = '/index.html' }; $file = Join-Path $root ($path.TrimStart('/')); if (Test-Path $file) { $bytes = [System.IO.File]::ReadAllBytes($file); $ext = [System.IO.Path]::GetExtension($file).ToLower(); $ctype = switch ($ext) { '.html' { 'text/html; charset=utf-8' } '.css' { 'text/css' } '.js' { 'application/javascript' } '.json' { 'application/json' } '.svg' { 'image/svg+xml' } '.png' { 'image/png' } default { 'application/octet-stream' } }; $context.Response.ContentType = $ctype; $context.Response.OutputStream.Write($bytes, 0, $bytes.Length) } else { $context.Response.StatusCode = 404; $msg = [Text.Encoding]::UTF8.GetBytes('Not found'); $context.Response.OutputStream.Write($msg, 0, $msg.Length) }; $context.Response.Close() }"
+started_at: 2026-06-21T16:35:03.061Z
+running_for_ms: 610006   
+---
+SERVER_READY http://localhost:8080/

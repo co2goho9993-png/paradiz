@@ -1,0 +1,2355 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ПАРАДИЗ — Дизайн-инструменты</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #ffffff;
+      --surface: #f5f5f7;
+      --surface-warm: #fbfbfd;
+      --fg: #1d1d1f;
+      --fg-2: #424245;
+      --muted: #6e6e73;
+      --meta: #86868b;
+      --border: #d2d2d7;
+      --border-soft: #e8e8ed;
+      --accent: #0071e3;
+      --accent-on: #ffffff;
+      --accent-hover: #0077ed;
+      --accent-active: #0066cc;
+      --success: #16a34a;
+      --warn: #eab308;
+      --danger: #dc2626;
+      --font-display: "SF Pro Display", "SF Pro Icons", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      --font-body: "SF Pro Text", "SF Pro Icons", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      --font-mono: "SF Mono", ui-monospace, "JetBrains Mono", Menlo, Monaco, Consolas, monospace;
+      --text-xs: 12px;
+      --text-sm: 14px;
+      --text-base: 17px;
+      --text-lg: 21px;
+      --text-xl: 28px;
+      --text-2xl: 40px;
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 18px;
+      --radius-pill: 980px;
+      --elev-raised: 0 12px 32px rgba(0, 0, 0, 0.08);
+      --focus-ring: 0 0 0 4px color-mix(in oklab, var(--accent), transparent 65%);
+      --motion-fast: 150ms;
+      --motion-base: 220ms;
+      --ease-standard: cubic-bezier(0.28, 0, 0.22, 1);
+      --nav-h: 52px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: var(--font-body);
+      font-size: var(--text-sm);
+      line-height: 1.47;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .app {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .nav {
+      flex-shrink: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      border-bottom: 1px solid var(--border-soft);
+      height: var(--nav-h);
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-inner {
+      width: 100%;
+      padding: 0 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .nav-brand {
+      font-weight: 600;
+      font-size: var(--text-sm);
+      letter-spacing: -0.01em;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--fg);
+      font-size: var(--text-xs);
+      opacity: 0.75;
+      transition: opacity var(--motion-fast);
+    }
+
+    .nav-links a:hover { opacity: 1; }
+    .nav-links a.active { font-weight: 600; opacity: 1; }
+
+    main {
+      flex: 1;
+      min-height: 0;
+      background: var(--surface);
+      overflow: hidden;
+    }
+
+    .panel {
+      display: none;
+      height: 100%;
+      padding: 16px 20px;
+      overflow: hidden;
+    }
+
+    .panel.active {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    h2 {
+      font-family: var(--font-display);
+      font-size: var(--text-lg);
+      font-weight: 600;
+      line-height: 1.1;
+      letter-spacing: -0.015em;
+      margin-bottom: 12px;
+    }
+
+    .workspace {
+      flex: 1;
+      min-height: 0;
+      display: grid;
+      gap: 12px;
+    }
+
+    .workspace--2col { grid-template-columns: 280px 1fr; }
+    .workspace--blob,
+    .workspace--wave,
+    .workspace--vector,
+    .workspace--color { grid-template-columns: 240px 1fr 220px; }
+
+    .card {
+      background: var(--bg);
+      border-radius: var(--radius-lg);
+      padding: 16px;
+      box-shadow: var(--elev-raised);
+      border: 1px solid var(--border-soft);
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card--grow { flex: 1; min-height: 0; }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 8px 16px;
+      border-radius: var(--radius-pill);
+      font-size: var(--text-xs);
+      font-weight: 500;
+      cursor: pointer;
+      transition: all var(--motion-base) var(--ease-standard);
+      border: none;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .btn-primary { background: var(--accent); color: var(--accent-on); }
+    .btn-primary:hover { background: var(--accent-hover); }
+    .btn-primary:active { background: var(--accent-active); }
+
+    .btn-secondary {
+      background: var(--surface);
+      color: var(--fg);
+      border: 1px solid var(--border);
+    }
+
+    .btn-secondary:hover { background: var(--border-soft); }
+
+    .btn-icon {
+      width: 40px;
+      height: 40px;
+      padding: 0;
+      border-radius: 50%;
+      font-size: 18px;
+    }
+
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .field { margin-bottom: 12px; }
+    .field:last-child { margin-bottom: 0; }
+
+    .field label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--muted);
+      margin-bottom: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .field label span { font-weight: 500; color: var(--fg); text-transform: none; letter-spacing: 0; }
+
+    .field input[type="text"],
+    .field input[type="number"],
+    .field textarea,
+    .field select {
+      width: 100%;
+      padding: 8px 12px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      background: var(--bg);
+      font-family: var(--font-body);
+      font-size: var(--text-sm);
+    }
+
+    .field input[type="color"] {
+      width: 100%;
+      height: 36px;
+      padding: 2px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      background: var(--bg);
+      cursor: pointer;
+    }
+
+    .field input[type="range"] {
+      width: 100%;
+      accent-color: var(--accent);
+    }
+
+    .field input:focus,
+    .field textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: var(--focus-ring);
+    }
+
+    .preview-area {
+      flex: 1;
+      min-height: 0;
+      background: var(--surface-warm);
+      border-radius: var(--radius-md);
+      border: 1px dashed var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .preview-area svg {
+      width: min(100%, 420px);
+      height: min(100%, 420px);
+    }
+
+    .preview-area--wave svg {
+      width: 100%;
+      height: 100%;
+      max-height: 100%;
+    }
+
+    .curve-options {
+      display: flex;
+      gap: 6px;
+    }
+
+    .curve-btn {
+      flex: 1;
+      padding: 6px 4px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      background: var(--surface);
+      font-size: 10px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all var(--motion-fast);
+      color: var(--fg-2);
+    }
+
+    .curve-btn:hover { background: var(--border-soft); }
+    .curve-btn.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: var(--accent-on);
+    }
+
+    .code-block {
+      flex: 1;
+      min-height: 0;
+      background: #1d1d1f;
+      color: #f5f5f7;
+      padding: 10px 12px;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      line-height: 1.4;
+      overflow: auto;
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+
+    .case-grid {
+      flex: 1;
+      min-height: 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .case-grid textarea {
+      flex: 1;
+      min-height: 0;
+      resize: none;
+      height: 100%;
+    }
+
+    .textarea-grow {
+      flex: 1;
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .contrast-row {
+      flex: 1;
+      min-height: 0;
+      display: grid;
+      grid-template-columns: 220px 1fr 200px;
+      gap: 16px;
+      align-items: stretch;
+    }
+
+    .contrast-preview {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 24px;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+    }
+
+    .contrast-preview p:first-child {
+      font-size: var(--text-xl);
+      font-weight: 600;
+      line-height: 1.1;
+    }
+
+    .contrast-result {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .contrast-result strong {
+      font-size: var(--text-xl);
+      font-weight: 700;
+    }
+
+    .blob-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: auto;
+      padding-top: 12px;
+    }
+
+    .blob-actions .btn { width: 100%; }
+
+    .blob-dice-row {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .blob-dice-row .btn-primary { flex: 1; }
+
+    .hint {
+      font-size: 11px;
+      color: var(--meta);
+      line-height: 1.35;
+      margin-top: 8px;
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 16px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: rgba(0, 0, 0, 0.82);
+      color: #fff;
+      padding: 8px 18px;
+      border-radius: var(--radius-pill);
+      font-size: var(--text-sm);
+      transition: transform var(--motion-base) var(--ease-standard);
+      z-index: 1000;
+      pointer-events: none;
+    }
+
+    .toast.visible { transform: translateX(-50%) translateY(0); }
+
+    .drop-zone {
+      border: 2px dashed var(--border);
+      border-radius: var(--radius-md);
+      padding: 14px 10px;
+      text-align: center;
+      cursor: pointer;
+      transition: border-color var(--motion-fast), background var(--motion-fast);
+      background: var(--surface-warm);
+    }
+
+    .drop-zone:hover,
+    .drop-zone.dragover {
+      border-color: var(--accent);
+      background: color-mix(in oklab, var(--accent), transparent 92%);
+    }
+
+    .drop-zone-icon {
+      font-size: 22px;
+      margin-bottom: 4px;
+      opacity: 0.7;
+    }
+
+    .drop-zone-title {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--fg);
+      margin-bottom: 2px;
+    }
+
+    .drop-zone-meta {
+      font-size: 10px;
+      color: var(--meta);
+      line-height: 1.35;
+    }
+
+    .drop-zone input[type="file"] { display: none; }
+
+    .preset-row {
+      display: flex;
+      gap: 4px;
+      flex-wrap: wrap;
+    }
+
+    .preset-btn {
+      flex: 1;
+      min-width: 0;
+      padding: 5px 4px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      background: var(--surface);
+      font-size: 9px;
+      font-weight: 500;
+      cursor: pointer;
+      color: var(--fg-2);
+      transition: all var(--motion-fast);
+    }
+
+    .preset-btn:hover { background: var(--border-soft); }
+    .preset-btn.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: var(--accent-on);
+    }
+
+    .compare-shell {
+      flex: 1;
+      min-height: 0;
+      position: relative;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-soft);
+      background:
+        linear-gradient(45deg, #e8e8ed 25%, transparent 25%),
+        linear-gradient(-45deg, #e8e8ed 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, #e8e8ed 75%),
+        linear-gradient(-45deg, transparent 75%, #e8e8ed 75%);
+      background-size: 16px 16px;
+      background-position: 0 0, 0 8px, 8px -8px, -8px 0;
+      background-color: #fff;
+      overflow: hidden;
+      user-select: none;
+    }
+
+    .compare-shell.empty {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-style: dashed;
+      background: var(--surface-warm);
+    }
+
+    .compare-empty {
+      text-align: center;
+      color: var(--meta);
+      font-size: 11px;
+      padding: 16px;
+      pointer-events: none;
+    }
+
+    .compare-stage {
+      position: absolute;
+      inset: 0;
+      display: none;
+    }
+
+    .compare-stage.ready { display: block; }
+
+    .compare-img,
+    .compare-svg-wrap {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .compare-img img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    .compare-svg-wrap {
+      clip-path: inset(0 0 0 50%);
+      background: transparent;
+    }
+
+    .compare-svg-wrap svg,
+    .compare-svg-wrap img {
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+    }
+
+    .compare-labels {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      right: 8px;
+      display: flex;
+      justify-content: space-between;
+      pointer-events: none;
+      z-index: 3;
+    }
+
+    .compare-label {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: var(--radius-pill);
+      background: rgba(0, 0, 0, 0.55);
+      color: #fff;
+    }
+
+    .compare-handle {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: var(--accent);
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      pointer-events: none;
+      box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.8);
+    }
+
+    .compare-handle::after {
+      content: '↔';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #fff;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--elev-raised);
+    }
+
+    .compare-slider {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      cursor: ew-resize;
+      z-index: 4;
+      margin: 0;
+    }
+
+    .view-toggle {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 8px;
+    }
+
+    .vector-status {
+      font-size: 10px;
+      color: var(--meta);
+      min-height: 14px;
+    }
+
+    .vector-status.busy { color: var(--accent); }
+
+    .picker-sv {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 1;
+      border-radius: var(--radius-md);
+      cursor: crosshair;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+
+    .picker-sv canvas { width: 100%; height: 100%; display: block; }
+
+    .picker-cursor {
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      border: 2px solid #fff;
+      border-radius: 50%;
+      box-shadow: 0 0 0 1px rgba(0,0,0,0.35), 0 2px 6px rgba(0,0,0,0.25);
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .picker-hue {
+      position: relative;
+      width: 100%;
+      height: 14px;
+      border-radius: var(--radius-pill);
+      margin-top: 10px;
+      cursor: pointer;
+      background: linear-gradient(to right,
+        #ff0000 0%, #ffff00 17%, #00ff00 33%, #00ffff 50%,
+        #0000ff 67%, #ff00ff 83%, #ff0000 100%);
+      border: 1px solid var(--border);
+    }
+
+    .picker-hue-thumb {
+      position: absolute;
+      top: 50%;
+      width: 16px;
+      height: 16px;
+      border: 2px solid #fff;
+      border-radius: 50%;
+      box-shadow: 0 0 0 1px rgba(0,0,0,0.3);
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+
+    .color-swatch-lg {
+      width: 100%;
+      height: 72px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      margin-bottom: 12px;
+    }
+
+    .format-row {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 8px;
+      align-items: center;
+    }
+
+    .format-row label {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--muted);
+      width: 42px;
+      flex-shrink: 0;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .format-row input {
+      flex: 1;
+      min-width: 0;
+      padding: 6px 8px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      background: var(--bg);
+      font-family: var(--font-mono);
+      font-size: 11px;
+    }
+
+    .format-row .btn-copy {
+      padding: 5px 8px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      background: var(--surface);
+      font-size: 10px;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: background var(--motion-fast);
+    }
+
+    .format-row .btn-copy:hover { background: var(--border-soft); }
+
+    .palette-section { margin-bottom: 14px; }
+    .palette-section:last-child { margin-bottom: 0; }
+
+    .palette-title {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 6px;
+    }
+
+    .palette-row {
+      display: flex;
+      gap: 4px;
+    }
+
+    .palette-swatch {
+      flex: 1;
+      height: 32px;
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(0,0,0,0.08);
+      cursor: pointer;
+      transition: transform var(--motion-fast);
+      min-width: 0;
+    }
+
+    .palette-swatch:hover { transform: scaleY(1.12); }
+
+    .harmony-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(64px, 1fr));
+      gap: 8px;
+    }
+
+    .harmony-card {
+      cursor: pointer;
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      border: 1px solid var(--border-soft);
+      transition: transform var(--motion-fast), box-shadow var(--motion-fast);
+    }
+
+    .harmony-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--elev-raised);
+    }
+
+    .harmony-card .sw {
+      height: 48px;
+    }
+
+    .harmony-card .lbl {
+      font-size: 9px;
+      font-weight: 600;
+      color: var(--muted);
+      text-align: center;
+      padding: 4px 2px;
+      background: var(--bg);
+    }
+
+    .wcag-mini {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .wcag-pair {
+      border-radius: var(--radius-sm);
+      padding: 10px;
+      text-align: center;
+      font-size: 11px;
+      font-weight: 600;
+      border: 1px solid var(--border-soft);
+    }
+
+    .wcag-pair small {
+      display: block;
+      font-size: 9px;
+      font-weight: 500;
+      margin-top: 4px;
+      opacity: 0.8;
+    }
+
+    .btn:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+
+    @media (max-width: 900px) {
+      .workspace--2col,
+      .workspace--blob,
+      .workspace--wave,
+      .workspace--vector,
+      .workspace--color,
+      .case-grid,
+      .contrast-row {
+        grid-template-columns: 1fr;
+      }
+
+      .panel { overflow-y: auto; }
+      html, body { overflow: auto; }
+      .app { height: auto; min-height: 100vh; }
+      main { overflow: visible; }
+    }
+
+    /* ========== ПАРАДИЗ — Figma Design System ========== */
+    :root {
+      --bg: #EDEDF1;
+      --surface: #EDEDF1;
+      --surface-warm: #F5F5F9;
+      --fg: #565C68;
+      --fg-2: #565C68;
+      --muted: #A2AABD;
+      --meta: #A2AABD;
+      --border: #D8DCE3;
+      --border-soft: #E0E4EA;
+      --accent: #30ABE9;
+      --accent-on: #FFFFFF;
+      --accent-hover: #28A0DC;
+      --accent-active: #1E93CF;
+      --font-display: 'Montserrat', sans-serif;
+      --font-body: 'Montserrat', sans-serif;
+      --font-mono: 'Montserrat', monospace;
+      --text-xs: 14px;
+      --text-sm: 17px;
+      --text-base: 18px;
+      --text-lg: 22px;
+      --text-xl: 28px;
+      --text-2xl: 33px;
+      --radius-sm: 10px;
+      --radius-md: 20px;
+      --radius-lg: 20px;
+      --radius-pill: 40px;
+      --elev-raised: none;
+      --focus-ring: 0 0 0 2px rgba(48, 171, 233, 0.24);
+      --nav-h: 60px;
+    }
+
+    html, body { font-family: 'Montserrat', sans-serif; }
+
+    .nav {
+      position: relative;
+      background: #fff;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      border-bottom: none;
+      border-left: none;
+      box-shadow: none;
+      height: 60px;
+    }
+
+    .nav-inner { padding: 0 40px; }
+
+    .nav-brand {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 33px;
+      font-weight: 800;
+      color: #565C68;
+      gap: 0;
+      letter-spacing: -0.02em;
+      position: relative;
+      padding-left: 50px;
+    }
+    .nav-brand .brand-accent { color: #30ABE9; }
+    .nav-brand > svg.nav-old-icon { display: none; }
+    .nav-decor-svg {
+      position: absolute;
+      left: -10px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 56px;
+      height: 56px;
+    }
+
+    .nav-links { gap: 8px; align-items: center; }
+    .nav-links a {
+      display: block;
+      min-width: 80px;
+      padding: 8px 20px;
+      border-radius: 10px;
+      color: #565C68;
+      text-align: center;
+      opacity: 1;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 18px;
+      font-weight: 600;
+      line-height: 1.2;
+      transition: background 0.15s, color 0.15s;
+    }
+    .nav-links a:hover { background: #E8F4FB; color: #303640; }
+    .nav-links a.active { background: #30ABE9; color: #fff; font-weight: 600; }
+
+    main { background: #EDEDF1; }
+    .panel { padding: 10px; }
+    .panel.active { gap: 10px; }
+    .workspace { gap: 10px; }
+    .workspace--blob,
+    .workspace--wave,
+    .workspace--vector,
+    .workspace--color { grid-template-columns: 260px 1fr 280px; }
+
+    .card {
+      border-radius: 20px;
+      padding: 24px;
+      border: none;
+      box-shadow: none;
+      background: #FFFFFF;
+    }
+
+    h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 22px;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 16px;
+      color: #A2AABD;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+    }
+
+    .btn {
+      padding: 10px 20px;
+      border-radius: 10px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+    }
+    .btn-primary { background: #30ABE9; color: #fff; }
+    .btn-primary:hover { background: #28A0DC; }
+    .btn-primary:active { background: #1E93CF; }
+    .btn-secondary { background: #A2AABD; color: #fff; border: none; }
+    .btn-secondary:hover { background: #949DB2; }
+    .btn-icon { width: 40px; height: 40px; border-radius: 10px; font-size: 18px; background: #A2AABD; color: #fff; border: none; }
+
+    .field { margin-bottom: 14px; }
+    .field label {
+      color: #A2AABD;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 17px;
+      font-weight: 400;
+      text-transform: none;
+      letter-spacing: 0;
+    }
+    .field label span { font-weight: 800; color: #565C68; }
+    .field input[type="text"],
+    .field input[type="number"],
+    .field textarea,
+    .field select { border-radius: 10px; font-family: 'Montserrat', sans-serif; }
+    .field input[type="range"] {
+      -webkit-appearance: none;
+      appearance: none;
+      height: 8px;
+      background: #EDEDF1;
+      border-radius: 20px;
+      outline: none;
+      accent-color: #30ABE9;
+    }
+    .field input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #30ABE9;
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(48,171,233,0.3);
+    }
+    .field input[type="range"]::-moz-range-thumb {
+      width: 20px; height: 20px;
+      border-radius: 50%;
+      background: #30ABE9;
+      cursor: pointer; border: none;
+    }
+    .field input[type="color"] { border-radius: 10px; }
+
+    .curve-options { gap: 6px; }
+    .curve-btn, .preset-btn {
+      border-radius: 20px;
+      background: #EDEDF1;
+      border: none;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 400;
+      color: #A2AABD;
+      font-size: 16px;
+      padding: 8px 14px;
+    }
+    .curve-btn.active, .preset-btn.active {
+      background: #30ABE9;
+      border-color: #30ABE9;
+      color: #fff;
+    }
+    .curve-btn:hover, .preset-btn:hover { background: #DFE3EA; }
+
+    .preview-area {
+      border-radius: 20px;
+      background-color: #fff;
+      border: none;
+    }
+    .preview-area svg { width: min(88%, 520px); height: min(88%, 520px); }
+    .preview-area--wave svg { width: 100%; height: 100%; }
+    .compare-shell { border-radius: 20px; background-color: #fff; }
+    .compare-shell.empty { border-style: dashed; border-color: #D8DCE3; background: #F5F5F9; }
+    .drop-zone {
+      border-width: 1px;
+      border-radius: 20px;
+      background: #F5F5F9;
+      border-color: #D8DCE3;
+    }
+    .drop-zone-icon { color: #30ABE9; }
+
+    .code-block {
+      border-radius: 20px;
+      background: #A2AABD;
+      color: #fff;
+      border: none;
+      padding: 16px 20px;
+      font-family: 'Montserrat', monospace;
+      font-size: 17px;
+      font-weight: 400;
+    }
+
+    .hint { color: #A2AABD; font-size: 14px; font-family: 'Montserrat', sans-serif; }
+    .color-swatch-lg { border-radius: 10px; border: none; }
+    .format-row label { font-family: 'Montserrat', sans-serif; font-size: 17px; font-weight: 800; color: #A2AABD; text-transform: uppercase; }
+    .format-row input { font-family: 'Montserrat', sans-serif; font-size: 17px; font-weight: 800; color: #565C68; border-radius: 10px; }
+    .format-row .btn-copy { border-radius: 10px; background: #30ABE9; color: #fff; border: none; }
+    .format-row .btn-copy:hover { background: #28A0DC; }
+    .palette-swatch { border-radius: 10px; }
+    .harmony-card { border-radius: 10px; }
+    .wcag-pair { border-radius: 10px; }
+    .palette-title { font-family: 'Montserrat', sans-serif; color: #A2AABD; text-transform: uppercase; }
+    .picker-sv { border-radius: 20px; }
+    .picker-hue { border-radius: 20px; }
+    .compare-handle { background: #30ABE9; }
+    .compare-handle::after { background: #30ABE9; }
+    .compare-label { border-radius: 10px; font-family: 'Montserrat', sans-serif; }
+    .toast { border-radius: 10px; font-family: 'Montserrat', sans-serif; }
+
+    #panel-case {
+      background: #EDEDF1;
+      padding: 24px clamp(24px, 8vw, 280px);
+      align-items: stretch;
+      justify-content: flex-start;
+    }
+    #panel-case .case-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      flex: 0 1 auto;
+      max-height: none;
+      gap: 10px;
+    }
+    #panel-case .card { padding: 24px; border-radius: 20px; }
+    #panel-case textarea {
+      border-radius: 10px;
+      background: #fff;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 18px;
+      font-weight: 400;
+      border: none;
+      resize: none;
+      min-height: 200px;
+      padding: 16px;
+      color: #565C68;
+    }
+    #panel-case .case-convert-btn {
+      padding: 14px 48px;
+      font-size: 18px;
+      font-weight: 700;
+      border-radius: 10px;
+      text-transform: uppercase;
+    }
+    .view-toggle .curve-btn { font-size: 14px; }
+
+    @media (max-width: 900px) {
+      .nav { border-left: none; }
+      .nav-inner { padding: 0 16px; align-items: center; overflow-x: auto; }
+      .nav-brand { font-size: 24px; padding-left: 40px; }
+      .nav-brand .nav-decor-svg { width: 40px; height: 40px; }
+      .nav-links { gap: 4px; }
+      .nav-links a { min-width: auto; padding: 6px 12px; font-size: 14px; }
+      #panel-case { padding: 16px; }
+      #panel-case .case-grid { max-height: none; }
+      .workspace--2col,
+      .workspace--blob,
+      .workspace--wave,
+      .workspace--vector,
+      .workspace--color,
+      .case-grid,
+      .contrast-row { grid-template-columns: 1fr; }
+      .panel { overflow-y: auto; }
+      html, body { overflow: auto; }
+      .app { height: auto; min-height: 100vh; }
+      main { overflow: visible; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <nav class="nav">
+      <div class="nav-inner">
+        <div class="nav-brand">
+          <svg class="nav-decor-svg" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="14" cy="28" r="22" fill="#30ABE9" opacity="0.15"/>
+            <circle cx="24" cy="28" r="18" fill="#30ABE9" opacity="0.25"/>
+            <circle cx="34" cy="28" r="14" fill="#30ABE9" opacity="0.45"/>
+          </svg>
+          <svg class="nav-old-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+          ПАРА<span class="brand-accent">DIZ</span>
+        </div>
+        <ul class="nav-links" id="mainNav">
+          <li><a href="#" data-tab="vector">Трассировка</a></li>
+          <li><a href="#" data-tab="blob">Блобы</a></li>
+          <li><a href="#" data-tab="wave">Волны</a></li>
+          <li><a href="#" data-tab="color">Цвета</a></li>
+          <li><a href="#" class="active" data-tab="case">Регистры</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <main>
+      <section class="panel active" id="panel-case">
+        <h2>Конвертер регистров</h2>
+        <div class="case-grid">
+          <div class="card card--grow">
+            <div class="textarea-grow">
+              <textarea id="caseInput" placeholder="Введите текст..." style="text-transform:uppercase; font-weight:700; font-size:20px; line-height:1.5">представили макеты роботизированной техники в совете федерации</textarea>
+            </div>
+          </div>
+          <div class="card card--grow">
+            <div class="textarea-grow">
+              <textarea id="caseOutput" readonly style="font-weight:400; font-size:18px; line-height:1.5"></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="case-actions" style="display:flex; justify-content:center; gap:10px; margin-top:10px;">
+          <button class="btn btn-primary case-convert-btn" onclick="runCase('upper')">Конвертировать</button>
+        </div>
+        <div class="case-modes" style="display:none">
+          <button class="btn btn-secondary" onclick="runCase('upper')">ВЕРХНИЙ</button>
+          <button class="btn btn-secondary" onclick="runCase('lower')">нижний</button>
+          <button class="btn btn-secondary" onclick="runCase('title')">Заглавные</button>
+          <button class="btn btn-secondary" onclick="runCase('kebab')">kebab-case</button>
+        </div>
+      </section>
+
+      <section class="panel" id="panel-color">
+        <div class="workspace workspace--color">
+          <div class="card">
+            <h2>Параметры</h2>
+            <div class="color-swatch-lg" id="colorPreview" style="border-radius:10px; height:36px; display:flex; align-items:center; justify-content:center; color:#fff; font-weight:700; font-size:15px; cursor:pointer;" onclick="document.getElementById('colorPickerToggle').style.display = document.getElementById('colorPickerToggle').style.display === 'none' ? 'block' : 'none'"></div>
+            <div style="margin-top:10px; display:flex; gap:16px; font-size:14px; color:#A2AABD;">
+              <div><span style="font-weight:400;">RGB</span> <span style="font-weight:800; color:#565C68;" id="colorRgbCompact"></span></div>
+            </div>
+            <div style="margin-top:6px; display:flex; gap:16px; font-size:14px; color:#A2AABD;">
+              <div><span style="font-weight:400;">CMYK</span> <span style="font-weight:800; color:#565C68;" id="colorCmykCompact"></span></div>
+            </div>
+            <div id="colorPickerToggle" style="display:none; margin-top:14px;">
+              <div class="picker-sv" id="pickerSv">
+                <canvas id="pickerSvCanvas" width="200" height="200"></canvas>
+                <div class="picker-cursor" id="pickerSvCursor"></div>
+              </div>
+              <div class="picker-hue" id="pickerHue">
+                <div class="picker-hue-thumb" id="pickerHueThumb"></div>
+              </div>
+              <div style="margin-top:14px">
+                <div class="format-row">
+                  <label>HEX</label>
+                  <input type="text" id="colorHex" value="#0071E3" maxlength="7" oninput="colorFromHex()">
+                  <button type="button" class="btn-copy" onclick="copyColorField('colorHex')">⎘</button>
+                </div>
+                <div class="format-row">
+                  <label>RGB</label>
+                  <input type="text" id="colorRgb" value="rgb(0, 113, 227)" oninput="colorFromRgb()">
+                  <button type="button" class="btn-copy" onclick="copyColorField('colorRgb')">⎘</button>
+                </div>
+                <div class="format-row">
+                  <label>HSL</label>
+                  <input type="text" id="colorHsl" value="hsl(211, 100%, 45%)" oninput="colorFromHsl()">
+                  <button type="button" class="btn-copy" onclick="copyColorField('colorHsl')">⎘</button>
+                </div>
+                <div class="format-row">
+                  <label>HSV</label>
+                  <input type="text" id="colorHsv" value="hsv(211, 100%, 89%)" oninput="colorFromHsv()">
+                  <button type="button" class="btn-copy" onclick="copyColorField('colorHsv')">⎘</button>
+                </div>
+                <div class="format-row">
+                  <label>CMYK</label>
+                  <input type="text" id="colorCmyk" value="cmyk(100%, 50%, 0%, 11%)" readonly>
+                  <button type="button" class="btn-copy" onclick="copyColorField('colorCmyk')">⎘</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card card--grow" style="overflow:auto">
+            <h2>Просмотр</h2>
+            <div class="palette-section">
+              <div class="palette-title">Комплементарная</div>
+              <div class="harmony-grid" id="harmonyComplementary"></div>
+            </div>
+            <div class="palette-section">
+              <div class="palette-title">Аналоговая</div>
+              <div class="harmony-grid" id="harmonyAnalogous"></div>
+            </div>
+            <div class="palette-section">
+              <div class="palette-title">Триада</div>
+              <div class="harmony-grid" id="harmonyTriadic"></div>
+            </div>
+            <div class="palette-section">
+              <div class="palette-title">Тетрада</div>
+              <div class="harmony-grid" id="harmonyTetradic"></div>
+            </div>
+            <h2 style="margin-top:16px">Доступность WCAG</h2>
+            <div class="wcag-mini" id="wcagPairs"></div>
+          </div>
+
+          <div class="card card--grow" style="overflow:auto">
+            <h2>SVG-код</h2>
+            <div class="palette-section">
+              <div class="palette-title">Shades — с чёрным</div>
+              <div class="palette-row" id="paletteShades"></div>
+            </div>
+            <div class="palette-section">
+              <div class="palette-title">Tints — с белым</div>
+              <div class="palette-row" id="paletteTints"></div>
+            </div>
+            <div class="palette-section">
+              <div class="palette-title">Tones — с серым</div>
+              <div class="palette-row" id="paletteTones"></div>
+            </div>
+            <h2 style="margin-top:16px">CSS</h2>
+            <div class="code-block" id="colorCss" style="min-height:80px;flex:none"></div>
+            <button class="btn btn-primary" style="margin-top:8px;width:100%" onclick="copyColorField('colorCss')">Копировать CSS</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel" id="panel-blob">
+        <div class="workspace workspace--blob">
+          <div class="card">
+            <h2>Параметры</h2>
+            <div class="color-info-block" id="blobColorInfo">
+              <div class="color-swatch-bar" id="blobColorSwatch" style="background:#a6cbd8; border-radius:10px; height:36px; display:flex; align-items:center; justify-content:center; color:#fff; font-weight:700; font-size:15px; margin-bottom:10px; cursor:pointer;" onclick="document.getElementById('blobColor').click()">#A0C4D0</div>
+              <input type="color" id="blobColor" value="#a0c4d0" oninput="genBlob(); updateBlobColorInfo()" style="display:none">
+              <div style="display:flex; gap:16px; font-size:14px; color:#A2AABD; margin-bottom:10px;">
+                <div><span style="font-weight:400;">RGB</span> <span style="font-weight:800; color:#565C68;" id="blobRgbVal">160 196 208</span></div>
+              </div>
+              <div style="display:flex; gap:16px; font-size:14px; color:#A2AABD; margin-bottom:16px;">
+                <div><span style="font-weight:400;">CMYK</span> <span style="font-weight:800; color:#565C68;" id="blobCmykVal">37 12 14 0</span></div>
+              </div>
+            </div>
+            <div class="field">
+              <label>Проще <span id="blobComplexVal">8</span> Сложнее</label>
+              <input type="range" id="blobComplex" min="3" max="20" value="8" oninput="genBlob()">
+            </div>
+            <div class="field">
+              <label>Глаже <span id="blobContrastVal">6</span> Острее</label>
+              <input type="range" id="blobContrast" min="1" max="10" value="6" oninput="genBlob()">
+            </div>
+
+            <div class="blob-dice-row">
+              <button class="btn btn-icon btn-secondary" onclick="randomizeBlob()" title="Случайная форма">🎲</button>
+              <button class="btn btn-secondary" onclick="randomizeBlob()">Случайная</button>
+            </div>
+            <div class="blob-actions">
+              <button class="btn btn-primary" onclick="downloadBlob()">Скачать SVG</button>
+            </div>
+          </div>
+
+          <div class="card card--grow">
+            <h2>Просмотр</h2>
+            <div class="preview-area" id="blobPreview"></div>
+          </div>
+
+          <div class="card card--grow">
+            <h2>SVG-код</h2>
+            <div class="code-block" id="blobCode"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel" id="panel-wave">
+        <div class="workspace workspace--wave">
+          <div class="card">
+            <h2>Параметры</h2>
+            <div class="field">
+              <label>Волна</label>
+              <div class="curve-options" id="waveCurveOpts">
+                <button type="button" class="curve-btn active" data-curve="wave" onclick="setWaveCurve('wave')">Волна</button>
+                <button type="button" class="curve-btn" data-curve="step" onclick="setWaveCurve('step')">Ступени</button>
+                <button type="button" class="curve-btn" data-curve="peak" onclick="setWaveCurve('peak')">Пики</button>
+              </div>
+            </div>
+            <div class="field">
+              <label>Направление</label>
+              <div class="curve-options" id="waveDirOpts">
+                <button type="button" class="curve-btn active" data-dir="up" onclick="setWaveDir('up')">Вверх</button>
+                <button type="button" class="curve-btn" data-dir="down" onclick="setWaveDir('down')">Вниз</button>
+              </div>
+            </div>
+            <div class="color-info-block" id="waveColorInfo">
+              <div class="color-swatch-bar" id="waveColorSwatch" style="background:#a0c4d0; border-radius:10px; height:36px; display:flex; align-items:center; justify-content:center; color:#fff; font-weight:700; font-size:15px; margin-bottom:10px; cursor:pointer;" onclick="document.getElementById('waveColor').click()">#A0C4D0</div>
+              <input type="color" id="waveColor" value="#a0c4d0" oninput="genWave(); updateWaveColorInfo()" style="display:none">
+              <div style="display:flex; gap:16px; font-size:14px; color:#A2AABD; margin-bottom:10px;">
+                <div><span style="font-weight:400;">RGB</span> <span style="font-weight:800; color:#565C68;" id="waveRgbVal">160 196 208</span></div>
+              </div>
+              <div style="display:flex; gap:16px; font-size:14px; color:#A2AABD; margin-bottom:16px;">
+                <div><span style="font-weight:400;">CMYK</span> <span style="font-weight:800; color:#565C68;" id="waveCmykVal">37 12 14 0</span></div>
+              </div>
+            </div>
+            <div class="field">
+              <label>Реже <span id="waveComplexVal">6</span> Чаще</label>
+              <input type="range" id="waveComplex" min="3" max="15" value="6" oninput="changeWaveComplexity()">
+            </div>
+            <div class="field">
+              <label>Прозрачность <span id="waveOpacityVal">100</span> %</label>
+              <input type="range" id="waveOpacity" min="10" max="100" value="100" oninput="genWave()">
+            </div>
+            <div class="blob-dice-row">
+              <button class="btn btn-icon btn-secondary" onclick="randomizeWave()" title="Случайная волна">🎲</button>
+              <button class="btn btn-secondary" onclick="randomizeWave()">Случайная</button>
+            </div>
+            <div class="blob-actions">
+              <button class="btn btn-primary" onclick="downloadWave()">Скачать SVG</button>
+            </div>
+          </div>
+
+          <div class="card card--grow">
+            <h2>Просмотр</h2>
+            <div class="preview-area preview-area--wave" id="wavePreview"></div>
+          </div>
+
+          <div class="card card--grow">
+            <h2>SVG-код</h2>
+            <div class="code-block" id="waveCode"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel" id="panel-vector">
+        <div class="workspace workspace--vector">
+          <div class="card">
+            <h2>Параметры</h2>
+            <div class="drop-zone" id="vectorDrop" tabindex="0">
+              <input type="file" id="vectorFile" accept="image/png,image/jpeg,image/webp,image/gif,image/bmp">
+              <div class="drop-zone-icon">⬆</div>
+              <div class="drop-zone-title">Загрузить изображение</div>
+              <div class="drop-zone-meta">PNG, JPG, WebP · перетащите · Ctrl+V</div>
+            </div>
+            <div class="field" style="margin-top:12px">
+              <label>Пресет</label>
+              <div class="preset-row" id="vectorPresets">
+                <button type="button" class="preset-btn active" data-preset="logo" onclick="setVectorPreset('logo')">Лого</button>
+                <button type="button" class="preset-btn" data-preset="illustration" onclick="setVectorPreset('illustration')">Арт</button>
+                <button type="button" class="preset-btn" data-preset="photo" onclick="setVectorPreset('photo')">Фото</button>
+              </div>
+            </div>
+            <div class="field">
+              <label>Режим</label>
+              <div class="curve-options" id="vectorModeOpts">
+                <button type="button" class="curve-btn active" data-mode="color" onclick="setVectorMode('color')">Цвет</button>
+                <button type="button" class="curve-btn" data-mode="mono" onclick="setVectorMode('mono')">Ч/Б</button>
+              </div>
+            </div>
+            <div class="field">
+              <label>Цвета <span id="vectorColorsVal">16</span></label>
+              <input type="range" id="vectorColors" min="2" max="32" value="16" oninput="scheduleVectorize()">
+            </div>
+            <div class="field">
+              <label>Детализация <span id="vectorDetailVal">6</span></label>
+              <input type="range" id="vectorDetail" min="1" max="10" value="6" oninput="scheduleVectorize()">
+            </div>
+            <div class="field">
+              <label>Сглаживание <span id="vectorBlurVal">1</span></label>
+              <input type="range" id="vectorBlur" min="0" max="5" value="1" oninput="scheduleVectorize()">
+            </div>
+            <div class="field">
+              <label>Убрать шум <span id="vectorNoiseVal">4</span></label>
+              <input type="range" id="vectorNoise" min="0" max="20" value="4" oninput="scheduleVectorize()">
+            </div>
+            <div class="blob-actions">
+              <button class="btn btn-primary" id="vectorDownloadBtn" onclick="downloadVector()" disabled>Скачать SVG</button>
+            </div>
+          </div>
+
+          <div class="card card--grow">
+            <div class="view-toggle" id="vectorViewToggle" style="display:none">
+              <button type="button" class="curve-btn active" data-view="compare" onclick="setVectorView('compare')">Сравнение</button>
+              <button type="button" class="curve-btn" data-view="pixels" onclick="setVectorView('pixels')">Пиксели</button>
+              <button type="button" class="curve-btn" data-view="vector" onclick="setVectorView('vector')">Вектор</button>
+            </div>
+            <div class="vector-status" id="vectorStatus"></div>
+            <div class="compare-shell empty" id="vectorCompareShell">
+              <div class="compare-empty" id="vectorEmpty">Перетащите изображение или вставьте из буфера</div>
+              <div class="compare-stage" id="vectorStage">
+                <div class="compare-labels">
+                  <span class="compare-label">ОРИГИНАЛ</span>
+                  <span class="compare-label">РЕЗУЛЬТАТ</span>
+                </div>
+                <div class="compare-img" id="vectorOriginal"></div>
+                <div class="compare-svg-wrap" id="vectorSvgWrap"></div>
+                <div class="compare-handle" id="vectorHandle"></div>
+                <input type="range" class="compare-slider" id="vectorSlider" min="0" max="100" value="50" oninput="updateCompareSlider(this.value)">
+              </div>
+            </div>
+          </div>
+
+          <div class="card card--grow">
+            <h2>SVG-код</h2>
+            <div class="code-block" id="vectorCode">Загрузите изображение для трассировки</div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div class="toast" id="toast">Скопировано</div>
+
+  <script src="imagetracer.js"></script>
+  <script>
+    let blobSeed = Math.floor(Math.random() * 999999);
+
+    function activateTab(tab) {
+      const link = document.querySelector(`.nav-links a[data-tab="${tab}"]`);
+      if (!link) return;
+      document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+      link.classList.add('active');
+      document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+      document.getElementById('panel-' + tab).classList.add('active');
+    }
+
+    document.getElementById('mainNav').addEventListener('click', (e) => {
+      const link = e.target.closest('a');
+      if (!link) return;
+      e.preventDefault();
+      activateTab(link.dataset.tab);
+    });
+
+    const hashTab = location.hash.replace('#', '');
+    if (hashTab && hashTab !== 'grid') activateTab(hashTab);
+
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg || 'Скопировано';
+      t.classList.add('visible');
+      setTimeout(() => t.classList.remove('visible'), 2000);
+    }
+
+    async function copyValue(id, isText = false) {
+      const el = document.getElementById(id);
+      const val = isText ? el.textContent : el.value;
+      await navigator.clipboard.writeText(val);
+      showToast();
+    }
+
+    function runCase(type) {
+      const input = document.getElementById('caseInput').value;
+      let out = input;
+      if (type === 'upper') out = input.toUpperCase();
+      if (type === 'lower') out = input.toLowerCase();
+      if (type === 'title') out = input.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()).join(' ');
+      if (type === 'kebab') out = input.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '');
+      document.getElementById('caseOutput').value = out;
+    }
+    runCase('lower');
+
+    /* HTML Color Codes-style picker */
+    let pickerH = 211;
+    let pickerS = 100;
+    let pickerV = 89;
+    let pickerDragging = null;
+
+    function clamp(n, lo, hi) { return Math.max(lo, Math.min(hi, n)); }
+
+    function hsvToRgb(h, s, v) {
+      s /= 100; v /= 100;
+      const c = v * s;
+      const x = c * (1 - Math.abs((h / 60) % 2 - 1));
+      const m = v - c;
+      let r = 0, g = 0, b = 0;
+      if (h < 60) { r = c; g = x; }
+      else if (h < 120) { r = x; g = c; }
+      else if (h < 180) { g = c; b = x; }
+      else if (h < 240) { g = x; b = c; }
+      else if (h < 300) { r = x; b = c; }
+      else { r = c; b = x; }
+      return {
+        r: Math.round((r + m) * 255),
+        g: Math.round((g + m) * 255),
+        b: Math.round((b + m) * 255)
+      };
+    }
+
+    function rgbToHsv(r, g, b) {
+      r /= 255; g /= 255; b /= 255;
+      const max = Math.max(r, g, b), min = Math.min(r, g, b);
+      const d = max - min;
+      let h = 0;
+      const v = max;
+      const s = max === 0 ? 0 : d / max;
+      if (d !== 0) {
+        if (max === r) h = 60 * (((g - b) / d) % 6);
+        else if (max === g) h = 60 * ((b - r) / d + 2);
+        else h = 60 * ((r - g) / d + 4);
+      }
+      if (h < 0) h += 360;
+      return { h, s: s * 100, v: v * 100 };
+    }
+
+    function rgbToHsl(r, g, b) {
+      r /= 255; g /= 255; b /= 255;
+      const max = Math.max(r, g, b), min = Math.min(r, g, b);
+      let h = 0, s = 0;
+      const l = (max + min) / 2;
+      const d = max - min;
+      if (d !== 0) {
+        s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+        if (max === r) h = ((g - b) / d + (g < b ? 6 : 0)) / 6;
+        else if (max === g) h = ((b - r) / d + 2) / 6;
+        else h = ((r - g) / d + 4) / 6;
+      }
+      return { h: h * 360, s: s * 100, l: l * 100 };
+    }
+
+    function hslToRgb(h, s, l) {
+      h /= 360; s /= 100; l /= 100;
+      if (s === 0) {
+        const v = Math.round(l * 255);
+        return { r: v, g: v, b: v };
+      }
+      const hue2rgb = (p, q, t) => {
+        if (t < 0) t += 1;
+        if (t > 1) t -= 1;
+        if (t < 1/6) return p + (q - p) * 6 * t;
+        if (t < 1/2) return q;
+        if (t < 2/3) return p + (q - p) * (2/3 - t) * 6;
+        return p;
+      };
+      const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+      const p = 2 * l - q;
+      return {
+        r: Math.round(hue2rgb(p, q, h + 1/3) * 255),
+        g: Math.round(hue2rgb(p, q, h) * 255),
+        b: Math.round(hue2rgb(p, q, h - 1/3) * 255)
+      };
+    }
+
+    function rgbToHex(r, g, b) {
+      return '#' + [r, g, b].map(c => clamp(Math.round(c), 0, 255).toString(16).padStart(2, '0')).join('').toUpperCase();
+    }
+
+    function parseHex(str) {
+      let h = str.trim().replace(/^#/, '');
+      if (h.length === 3) h = h.split('').map(c => c + c).join('');
+      if (!/^[0-9a-fA-F]{6}$/.test(h)) return null;
+      const n = parseInt(h, 16);
+      return { r: (n >> 16) & 255, g: (n >> 8) & 255, b: n & 255 };
+    }
+
+    function rgbToCmyk(r, g, b) {
+      if (r === 0 && g === 0 && b === 0) return { c: 0, m: 0, y: 0, k: 100 };
+      const c = 1 - r / 255, m = 1 - g / 255, y = 1 - b / 255;
+      const k = Math.min(c, m, y);
+      return {
+        c: Math.round(((c - k) / (1 - k)) * 100),
+        m: Math.round(((m - k) / (1 - k)) * 100),
+        y: Math.round(((y - k) / (1 - k)) * 100),
+        k: Math.round(k * 100)
+      };
+    }
+
+    function mixRgb(r1, g1, b1, r2, g2, b2, t) {
+      return {
+        r: Math.round(r1 + (r2 - r1) * t),
+        g: Math.round(g1 + (g2 - g1) * t),
+        b: Math.round(b1 + (b2 - b1) * t)
+      };
+    }
+
+    function setPickerFromHsv(h, s, v, skipField) {
+      pickerH = ((h % 360) + 360) % 360;
+      pickerS = clamp(s, 0, 100);
+      pickerV = clamp(v, 0, 100);
+      const rgb = hsvToRgb(pickerH, pickerS, pickerV);
+      const hsl = rgbToHsl(rgb.r, rgb.g, rgb.b);
+      const cmyk = rgbToCmyk(rgb.r, rgb.g, rgb.b);
+      const hex = rgbToHex(rgb.r, rgb.g, rgb.b);
+
+      document.getElementById('colorPreview').style.background = hex;
+      document.getElementById('colorPreview').textContent = hex.toUpperCase();
+      const rgbC = document.getElementById('colorRgbCompact');
+      if (rgbC) rgbC.textContent = `${rgb.r} ${rgb.g} ${rgb.b}`;
+      const cmykC = document.getElementById('colorCmykCompact');
+      if (cmykC) cmykC.textContent = `${cmyk.c} ${cmyk.m} ${cmyk.y} ${cmyk.k}`;
+      if (skipField !== 'hex') document.getElementById('colorHex').value = hex;
+      if (skipField !== 'rgb') document.getElementById('colorRgb').value = `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`;
+      if (skipField !== 'hsl') document.getElementById('colorHsl').value = `hsl(${Math.round(hsl.h)}, ${Math.round(hsl.s)}%, ${Math.round(hsl.l)}%)`;
+      if (skipField !== 'hsv') document.getElementById('colorHsv').value = `hsv(${Math.round(pickerH)}, ${Math.round(pickerS)}%, ${Math.round(pickerV)}%)`;
+      document.getElementById('colorCmyk').value = `cmyk(${cmyk.c}%, ${cmyk.m}%, ${cmyk.y}%, ${cmyk.k}%)`;
+      document.getElementById('colorCss').textContent = `color: ${hex};\nbackground-color: ${hex};\nborder-color: ${hex};`;
+
+      drawPickerSv();
+      updatePickerCursors();
+      renderPalettes(rgb);
+      renderHarmonies(pickerH);
+      renderWcag(rgb);
+    }
+
+    function drawPickerSv() {
+      const canvas = document.getElementById('pickerSvCanvas');
+      const ctx = canvas.getContext('2d');
+      const w = canvas.width, h = canvas.height;
+      const hueRgb = hsvToRgb(pickerH, 100, 100);
+      const gradWhite = ctx.createLinearGradient(0, 0, w, 0);
+      gradWhite.addColorStop(0, '#fff');
+      gradWhite.addColorStop(1, `rgb(${hueRgb.r},${hueRgb.g},${hueRgb.b})`);
+      ctx.fillStyle = gradWhite;
+      ctx.fillRect(0, 0, w, h);
+      const gradBlack = ctx.createLinearGradient(0, 0, 0, h);
+      gradBlack.addColorStop(0, 'rgba(0,0,0,0)');
+      gradBlack.addColorStop(1, '#000');
+      ctx.fillStyle = gradBlack;
+      ctx.fillRect(0, 0, w, h);
+    }
+
+    function updatePickerCursors() {
+      const sv = document.getElementById('pickerSv');
+      const svRect = sv.getBoundingClientRect();
+      const svCursor = document.getElementById('pickerSvCursor');
+      svCursor.style.left = (pickerS / 100 * svRect.width) + 'px';
+      svCursor.style.top = ((100 - pickerV) / 100 * svRect.height) + 'px';
+      document.getElementById('pickerHueThumb').style.left = (pickerH / 360 * 100) + '%';
+    }
+
+    function renderPalettes(rgb) {
+      const steps = [0, 0.2, 0.4, 0.6, 0.8, 1];
+      const mk = (containerId, r2, g2, b2) => {
+        const el = document.getElementById(containerId);
+        el.innerHTML = steps.map(t => {
+          const c = mixRgb(rgb.r, rgb.g, rgb.b, r2, g2, b2, t);
+          const hex = rgbToHex(c.r, c.g, c.b);
+          return `<div class="palette-swatch" style="background:${hex}" title="${hex}" onclick="pickColorHex('${hex}')"></div>`;
+        }).join('');
+      };
+      mk('paletteShades', 0, 0, 0);
+      mk('paletteTints', 255, 255, 255);
+      mk('paletteTones', 128, 128, 128);
+    }
+
+    function renderHarmony(containerId, hues, labels) {
+      const el = document.getElementById(containerId);
+      el.innerHTML = hues.map((h, i) => {
+        const rgb = hsvToRgb(h, pickerS, pickerV);
+        const hex = rgbToHex(rgb.r, rgb.g, rgb.b);
+        const lbl = labels ? labels[i] : hex;
+        return `<div class="harmony-card" onclick="pickColorHex('${hex}')"><div class="sw" style="background:${hex}"></div><div class="lbl">${lbl}</div></div>`;
+      }).join('');
+    }
+
+    function renderHarmonies(h) {
+      renderHarmony('harmonyComplementary', [h, h + 180], ['Базовый', 'Доп.']);
+      renderHarmony('harmonyAnalogous', [h - 30, h, h + 30], ['−30°', 'Базовый', '+30°']);
+      renderHarmony('harmonyTriadic', [h, h + 120, h + 240], ['1', '2', '3']);
+      renderHarmony('harmonyTetradic', [h, h + 90, h + 180, h + 270], ['1', '2', '3', '4']);
+    }
+
+    function luminance(r, g, b) {
+      const [rs, gs, bs] = [r, g, b].map(c => {
+        c /= 255;
+        return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
+      });
+      return 0.2126 * rs + 0.7152 * gs + 0.0722 * bs;
+    }
+
+    function contrastRatio(r1, g1, b1, r2, g2, b2) {
+      const l1 = luminance(r1, g1, b1);
+      const l2 = luminance(r2, g2, b2);
+      return (Math.max(l1, l2) + 0.05) / (Math.min(l1, l2) + 0.05);
+    }
+
+    function renderWcag(rgb) {
+      const pairs = [
+        { fg: rgb, bg: { r: 255, g: 255, b: 255 }, label: 'На белом' },
+        { fg: { r: 255, g: 255, b: 255 }, bg: rgb, label: 'Белый текст' },
+        { fg: rgb, bg: { r: 0, g: 0, b: 0 }, label: 'На чёрном' },
+        { fg: { r: 0, g: 0, b: 0 }, bg: rgb, label: 'Чёрный текст' }
+      ];
+      document.getElementById('wcagPairs').innerHTML = pairs.map(p => {
+        const ratio = contrastRatio(p.fg.r, p.fg.g, p.fg.b, p.bg.r, p.bg.g, p.bg.b);
+        const pass = ratio >= 4.5 ? 'AA ✓' : ratio >= 3 ? 'AA Large' : '✗';
+        const fgHex = rgbToHex(p.fg.r, p.fg.g, p.fg.b);
+        const bgHex = rgbToHex(p.bg.r, p.bg.g, p.bg.b);
+        return `<div class="wcag-pair" style="color:${fgHex};background:${bgHex}">${ratio.toFixed(2)}:1<small>${p.label} · ${pass}</small></div>`;
+      }).join('');
+    }
+
+    function pickColorHex(hex) {
+      const rgb = parseHex(hex);
+      if (!rgb) return;
+      const hsv = rgbToHsv(rgb.r, rgb.g, rgb.b);
+      setPickerFromHsv(hsv.h, hsv.s, hsv.v);
+    }
+
+    function colorFromHex() {
+      const rgb = parseHex(document.getElementById('colorHex').value);
+      if (!rgb) return;
+      const hsv = rgbToHsv(rgb.r, rgb.g, rgb.b);
+      setPickerFromHsv(hsv.h, hsv.s, hsv.v, 'hex');
+    }
+
+    function colorFromRgb() {
+      const m = document.getElementById('colorRgb').value.match(/(\d+)\s*,\s*(\d+)\s*,\s*(\d+)/);
+      if (!m) return;
+      const hsv = rgbToHsv(+m[1], +m[2], +m[3]);
+      setPickerFromHsv(hsv.h, hsv.s, hsv.v, 'rgb');
+    }
+
+    function colorFromHsl() {
+      const m = document.getElementById('colorHsl').value.match(/([\d.]+)\s*,\s*([\d.]+)%?\s*,\s*([\d.]+)%?/);
+      if (!m) return;
+      const rgb = hslToRgb(+m[1], +m[2], +m[3]);
+      const hsv = rgbToHsv(rgb.r, rgb.g, rgb.b);
+      setPickerFromHsv(hsv.h, hsv.s, hsv.v, 'hsl');
+    }
+
+    function colorFromHsv() {
+      const m = document.getElementById('colorHsv').value.match(/([\d.]+)\s*,\s*([\d.]+)%?\s*,\s*([\d.]+)%?/);
+      if (!m) return;
+      setPickerFromHsv(+m[1], +m[2], +m[3], 'hsv');
+    }
+
+    async function copyColorField(id) {
+      const el = document.getElementById(id);
+      await navigator.clipboard.writeText(el.value || el.textContent);
+      showToast('Скопировано');
+    }
+
+    function pickerSvFromEvent(e) {
+      const rect = document.getElementById('pickerSv').getBoundingClientRect();
+      const x = clamp((e.clientX - rect.left) / rect.width, 0, 1);
+      const y = clamp((e.clientY - rect.top) / rect.height, 0, 1);
+      setPickerFromHsv(pickerH, x * 100, (1 - y) * 100);
+    }
+
+    function pickerHueFromEvent(e) {
+      const rect = document.getElementById('pickerHue').getBoundingClientRect();
+      const x = clamp((e.clientX - rect.left) / rect.width, 0, 1);
+      setPickerFromHsv(x * 360, pickerS, pickerV);
+    }
+
+    function initColorPicker() {
+      const sv = document.getElementById('pickerSv');
+      const hue = document.getElementById('pickerHue');
+
+      sv.addEventListener('mousedown', e => { pickerDragging = 'sv'; pickerSvFromEvent(e); });
+      hue.addEventListener('mousedown', e => { pickerDragging = 'hue'; pickerHueFromEvent(e); });
+      document.addEventListener('mousemove', e => {
+        if (pickerDragging === 'sv') pickerSvFromEvent(e);
+        if (pickerDragging === 'hue') pickerHueFromEvent(e);
+      });
+      document.addEventListener('mouseup', () => { pickerDragging = null; });
+
+      sv.addEventListener('touchstart', e => { e.preventDefault(); pickerDragging = 'sv'; pickerSvFromEvent(e.touches[0]); }, { passive: false });
+      hue.addEventListener('touchstart', e => { e.preventDefault(); pickerDragging = 'hue'; pickerHueFromEvent(e.touches[0]); }, { passive: false });
+      document.addEventListener('touchmove', e => {
+        if (pickerDragging === 'sv') { e.preventDefault(); pickerSvFromEvent(e.touches[0]); }
+        if (pickerDragging === 'hue') { e.preventDefault(); pickerHueFromEvent(e.touches[0]); }
+      }, { passive: false });
+      document.addEventListener('touchend', () => { pickerDragging = null; });
+
+      setPickerFromHsv(pickerH, pickerS, pickerV);
+    }
+    initColorPicker();
+
+    /* Blobmaker-style generator (blobshape algorithm) */
+    function toRad(deg) { return deg * (Math.PI / 180); }
+
+    function divide(count) {
+      const deg = 360 / count;
+      return Array.from({ length: count }, (_, i) => i * deg);
+    }
+
+    function randomDoubleGenerator(s) {
+      const mask = 0xffffffff;
+      let m_w = (123456789 + s) & mask;
+      let m_z = (987654321 - s) & mask;
+      return function () {
+        m_z = (36969 * (m_z & 65535) + (m_z >>> 16)) & mask;
+        m_w = (18000 * (m_w & 65535) + (m_w >>> 16)) & mask;
+        let result = ((m_z << 16) + (m_w & 65535)) >>> 0;
+        result /= 4294967296;
+        return result;
+      };
+    }
+
+    function magicPoint(value, min, max) {
+      let radius = min + value * (max - min);
+      if (radius > max) radius -= min;
+      else if (radius < min) radius += min;
+      return radius;
+    }
+
+    function fmt(n) { return +n.toFixed(2); }
+
+    function point(origin, radius, degree) {
+      const x = origin + radius * Math.cos(toRad(degree));
+      const y = origin + radius * Math.sin(toRad(degree));
+      return [x, y];
+    }
+
+    function createBlobPoints(size, growth, edgesCount, seed) {
+      const outerRad = size / 2;
+      const innerRad = growth * (outerRad / 10);
+      const center = size / 2;
+      const slices = divide(edgesCount);
+      const randVal = randomDoubleGenerator(seed);
+      const destPoints = [];
+      slices.forEach(degree => {
+        const radius = magicPoint(randVal(), innerRad, outerRad);
+        destPoints.push(point(center, radius, degree));
+      });
+      return destPoints;
+    }
+
+    function createSvgPath(points) {
+      const n = points.length;
+      if (n < 3) return '';
+
+      let d = `M${fmt(points[0][0])},${fmt(points[0][1])}`;
+      for (let i = 0; i < n; i++) {
+        const p0 = points[(i - 1 + n) % n];
+        const p1 = points[i];
+        const p2 = points[(i + 1) % n];
+        const p3 = points[(i + 2) % n];
+        const cp1x = p1[0] + (p2[0] - p0[0]) / 6;
+        const cp1y = p1[1] + (p2[1] - p0[1]) / 6;
+        const cp2x = p2[0] - (p3[0] - p1[0]) / 6;
+        const cp2y = p2[1] - (p3[1] - p1[1]) / 6;
+        d += `C${fmt(cp1x)},${fmt(cp1y)},${fmt(cp2x)},${fmt(cp2y)},${fmt(p2[0])},${fmt(p2[1])}`;
+      }
+      return d + 'Z';
+    }
+
+    function buildBlobSvg() {
+      const sizeEl = document.getElementById('blobSize');
+      const size = sizeEl ? +sizeEl.value : 400;
+      const edges = +document.getElementById('blobComplex').value;
+      const contrast = +document.getElementById('blobContrast').value;
+      const color = document.getElementById('blobColor').value;
+      const points = createBlobPoints(size, contrast, edges, blobSeed);
+      const path = createSvgPath(points);
+      const svg = `<svg viewBox="0 0 ${size} ${size}" xmlns="http://www.w3.org/2000/svg" shape-rendering="geometricPrecision"><path d="${path}" fill="${color}"/></svg>`;
+      return { svg, path, size, color };
+    }
+
+    function genBlob() {
+      document.getElementById('blobComplexVal').textContent = document.getElementById('blobComplex').value;
+      document.getElementById('blobContrastVal').textContent = document.getElementById('blobContrast').value;
+
+      const { svg } = buildBlobSvg();
+      document.getElementById('blobPreview').innerHTML = svg;
+      document.getElementById('blobCode').textContent = svg;
+    }
+
+    function randomizeBlob() {
+      blobSeed = Math.floor(Math.random() * 999999);
+      genBlob();
+    }
+
+    async function copyBlobSvg() {
+      await navigator.clipboard.writeText(document.getElementById('blobCode').textContent);
+      showToast('SVG скопирован');
+    }
+
+    function downloadBlob() {
+      const { svg } = buildBlobSvg();
+      const blob = new Blob([svg], { type: 'image/svg+xml' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `blob-${blobSeed}.svg`;
+      a.click();
+      URL.revokeObjectURL(url);
+      showToast('SVG скачан');
+    }
+
+    genBlob();
+
+    /* Color info helpers for Blob / Wave */
+    function hexToRgbArr(hex) {
+      hex = hex.replace('#', '');
+      return [parseInt(hex.substr(0,2),16), parseInt(hex.substr(2,2),16), parseInt(hex.substr(4,2),16)];
+    }
+    function updateBlobColorInfo() {
+      const hex = document.getElementById('blobColor').value;
+      const [r,g,b] = hexToRgbArr(hex);
+      const cmyk = rgbToCmyk(r,g,b);
+      const sw = document.getElementById('blobColorSwatch');
+      sw.style.background = hex;
+      sw.textContent = hex.toUpperCase();
+      document.getElementById('blobRgbVal').textContent = `${r} ${g} ${b}`;
+      document.getElementById('blobCmykVal').textContent = `${cmyk.c} ${cmyk.m} ${cmyk.y} ${cmyk.k}`;
+    }
+    function updateWaveColorInfo() {
+      const hex = document.getElementById('waveColor').value;
+      const [r,g,b] = hexToRgbArr(hex);
+      const cmyk = rgbToCmyk(r,g,b);
+      const sw = document.getElementById('waveColorSwatch');
+      sw.style.background = hex;
+      sw.textContent = hex.toUpperCase();
+      document.getElementById('waveRgbVal').textContent = `${r} ${g} ${b}`;
+      document.getElementById('waveCmykVal').textContent = `${cmyk.c} ${cmyk.m} ${cmyk.y} ${cmyk.k}`;
+    }
+
+    /* Get Waves-style generator */
+    const WAVE_W = 1440;
+    const WAVE_H = 320;
+    let waveCurve = 'wave';
+    let waveDir = 'up';
+    let waveData = [];
+
+    function randomWaveData(complexity) {
+      return Array.from({ length: complexity }, () => Math.random() * 10);
+    }
+
+    function wavePoints(data, complexity) {
+      const x = i => complexity <= 1 ? 0 : (i / (complexity - 1)) * WAVE_W;
+      const heightEl = document.getElementById('waveHeight');
+      const amp = heightEl ? (+heightEl.value / 100) : 1;
+      const baseline = waveDir === 'up' ? WAVE_H : 0;
+      const y = v => {
+        const offset = (v / 10) * WAVE_H * amp;
+        return waveDir === 'up' ? baseline - offset : baseline + offset;
+      };
+      return data.map((v, i) => [x(i), y(v)]);
+    }
+
+    function smoothTop(points) {
+      if (points.length < 2) {
+        const y = points[0] ? points[0][1] : 0;
+        return `M0,${fmt(y)}L${WAVE_W},${fmt(y)}`;
+      }
+      let d = `M${fmt(points[0][0])},${fmt(points[0][1])}`;
+      for (let i = 0; i < points.length - 1; i++) {
+        const [x1, y1] = points[i];
+        const [x2, y2] = points[i + 1];
+        const cx = (x1 + x2) / 2;
+        d += `C${fmt(cx)},${fmt(y1)} ${fmt(cx)},${fmt(y2)} ${fmt(x2)},${fmt(y2)}`;
+      }
+      return d;
+    }
+
+    function peakTop(points) {
+      let d = `M${fmt(points[0][0])},${fmt(points[0][1])}`;
+      for (let i = 1; i < points.length; i++) {
+        d += `L${fmt(points[i][0])},${fmt(points[i][1])}`;
+      }
+      return d;
+    }
+
+    function stepTop(points) {
+      let d = `M${fmt(points[0][0])},${fmt(points[0][1])}`;
+      for (let i = 1; i < points.length; i++) {
+        d += `H${fmt(points[i][0])}V${fmt(points[i][1])}`;
+      }
+      return d;
+    }
+
+    function buildWavePath() {
+      const complexity = +document.getElementById('waveComplex').value;
+      const baseline = waveDir === 'up' ? WAVE_H : 0;
+      const pts = wavePoints(waveData, complexity);
+      let top = peakTop(pts);
+      if (waveCurve === 'wave') top = smoothTop(pts);
+      if (waveCurve === 'step') top = stepTop(pts);
+
+      const close = `L${WAVE_W},${baseline}L0,${baseline}Z`;
+      return top + close;
+    }
+
+    function buildWaveSvg() {
+      const color = document.getElementById('waveColor').value;
+      const opacity = +document.getElementById('waveOpacity').value / 100;
+      const path = buildWavePath();
+      const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${WAVE_W} ${WAVE_H}" shape-rendering="geometricPrecision"><path fill="${color}" fill-opacity="${opacity}" d="${path}"/></svg>`;
+      return { svg, path, color, opacity };
+    }
+
+    function genWave() {
+      const hv = document.getElementById('waveHeightVal');
+      const he = document.getElementById('waveHeight');
+      if (hv && he) hv.textContent = he.value;
+      document.getElementById('waveComplexVal').textContent = document.getElementById('waveComplex').value;
+      document.getElementById('waveOpacityVal').textContent = document.getElementById('waveOpacity').value;
+
+      const { svg } = buildWaveSvg();
+      document.getElementById('wavePreview').innerHTML = svg;
+      document.getElementById('waveCode').textContent = svg;
+    }
+
+    function changeWaveComplexity() {
+      const complexity = +document.getElementById('waveComplex').value;
+      waveData = randomWaveData(complexity);
+      genWave();
+    }
+
+    function setWaveCurve(curve) {
+      waveCurve = curve;
+      document.querySelectorAll('#waveCurveOpts .curve-btn').forEach(b => {
+        b.classList.toggle('active', b.dataset.curve === curve);
+      });
+      genWave();
+    }
+
+    function setWaveDir(dir) {
+      waveDir = dir;
+      document.querySelectorAll('#waveDirOpts .curve-btn').forEach(b => {
+        b.classList.toggle('active', b.dataset.dir === dir);
+      });
+      genWave();
+    }
+
+    function randomizeWave() {
+      waveData = randomWaveData(+document.getElementById('waveComplex').value);
+      genWave();
+    }
+
+    async function copyWaveSvg() {
+      await navigator.clipboard.writeText(document.getElementById('waveCode').textContent);
+      showToast('SVG скопирован');
+    }
+
+    function downloadWave() {
+      const { svg } = buildWaveSvg();
+      const blob = new Blob([svg], { type: 'image/svg+xml' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'wave.svg';
+      a.click();
+      URL.revokeObjectURL(url);
+      showToast('SVG скачан');
+    }
+
+    waveData = randomWaveData(6);
+    genWave();
+
+    /* Vectorizer.AI-style image tracing */
+    const VECTOR_PRESETS = {
+      logo: { colors: 12, detail: 9, blur: 0, noise: 6, mode: 'color' },
+      illustration: { colors: 24, detail: 7, blur: 1, noise: 3, mode: 'color' },
+      photo: { colors: 32, detail: 5, blur: 2, noise: 1, mode: 'color' }
+    };
+
+    let vectorSourceUrl = null;
+    let vectorSourceName = 'image';
+    let vectorSvg = '';
+    let vectorMode = 'color';
+    let vectorView = 'compare';
+    let vectorTimer = null;
+    let vectorBusy = false;
+
+    function setVectorStatus(msg, busy = false) {
+      const el = document.getElementById('vectorStatus');
+      el.textContent = msg || '';
+      el.classList.toggle('busy', busy);
+    }
+
+    function setVectorButtons(enabled) {
+      document.getElementById('vectorDownloadBtn').disabled = !enabled;
+      const cb = document.getElementById('vectorCopyBtn');
+      if (cb) cb.disabled = !enabled;
+    }
+
+    function updateCompareSlider(val) {
+      const pct = val + '%';
+      document.getElementById('vectorSvgWrap').style.clipPath = `inset(0 0 0 ${pct})`;
+      document.getElementById('vectorHandle').style.left = pct;
+    }
+
+    function setVectorView(view) {
+      vectorView = view;
+      document.querySelectorAll('#vectorViewToggle .curve-btn').forEach(b => {
+        b.classList.toggle('active', b.dataset.view === view);
+      });
+
+      const original = document.getElementById('vectorOriginal');
+      const svgWrap = document.getElementById('vectorSvgWrap');
+      const handle = document.getElementById('vectorHandle');
+      const slider = document.getElementById('vectorSlider');
+      const labels = document.querySelector('.compare-labels');
+
+      if (view === 'compare') {
+        original.style.display = '';
+        svgWrap.style.display = '';
+        handle.style.display = '';
+        slider.style.display = '';
+        labels.style.display = '';
+        updateCompareSlider(slider.value);
+      } else if (view === 'pixels') {
+        original.style.display = '';
+        svgWrap.style.display = 'none';
+        handle.style.display = 'none';
+        slider.style.display = 'none';
+        labels.style.display = 'none';
+      } else {
+        original.style.display = 'none';
+        svgWrap.style.display = '';
+        svgWrap.style.clipPath = 'inset(0)';
+        handle.style.display = 'none';
+        slider.style.display = 'none';
+        labels.style.display = 'none';
+      }
+    }
+
+    function setVectorMode(mode) {
+      vectorMode = mode;
+      document.querySelectorAll('#vectorModeOpts .curve-btn').forEach(b => {
+        b.classList.toggle('active', b.dataset.mode === mode);
+      });
+      const colorsInput = document.getElementById('vectorColors');
+      colorsInput.disabled = mode === 'mono';
+      if (mode === 'mono') colorsInput.value = 2;
+      document.getElementById('vectorColorsVal').textContent = colorsInput.value;
+      scheduleVectorize();
+    }
+
+    function setVectorPreset(preset) {
+      const p = VECTOR_PRESETS[preset];
+      if (!p) return;
+      document.querySelectorAll('#vectorPresets .preset-btn').forEach(b => {
+        b.classList.toggle('active', b.dataset.preset === preset);
+      });
+      document.getElementById('vectorColors').value = p.colors;
+      document.getElementById('vectorDetail').value = p.detail;
+      document.getElementById('vectorBlur').value = p.blur;
+      document.getElementById('vectorNoise').value = p.noise;
+      setVectorMode(p.mode);
+    }
+
+    function readVectorOptions() {
+      const detail = +document.getElementById('vectorDetail').value;
+      const ltres = Math.max(0.05, 0.8 - detail * 0.07);
+      const qtres = Math.max(0.05, 0.8 - detail * 0.07);
+      const colors = vectorMode === 'mono' ? 2 : +document.getElementById('vectorColors').value;
+      const blur = +document.getElementById('vectorBlur').value;
+
+      document.getElementById('vectorColorsVal').textContent = colors;
+      document.getElementById('vectorDetailVal').textContent = detail;
+      document.getElementById('vectorBlurVal').textContent = blur;
+      document.getElementById('vectorNoiseVal').textContent = document.getElementById('vectorNoise').value;
+
+      return {
+        numberofcolors: colors,
+        colorsampling: vectorMode === 'mono' ? 0 : 3,
+        mincolorratio: 0.015,
+        colorquantcycles: 4,
+        ltres,
+        qtres,
+        pathomit: +document.getElementById('vectorNoise').value,
+        blurradius: blur,
+        blurdelta: blur > 0 ? 12 : 4,
+        strokewidth: 0,
+        linefilter: true,
+        scale: 2,
+        lcpr: 0,
+        qcpr: 0,
+        viewbox: true,
+        desc: false,
+        roundcoords: 2,
+        rightangleenhance: false
+      };
+    }
+
+    function loadImageFromFile(file) {
+      if (!file || !file.type.startsWith('image/')) {
+        showToast('Нужен файл изображения');
+        return;
+      }
+      vectorSourceName = (file.name || 'image').replace(/\.[^.]+$/, '');
+      if (vectorSourceUrl) URL.revokeObjectURL(vectorSourceUrl);
+      vectorSourceUrl = URL.createObjectURL(file);
+      showVectorSource(vectorSourceUrl);
+      scheduleVectorize(true);
+    }
+
+    function showVectorSource(url) {
+      document.getElementById('vectorEmpty').style.display = 'none';
+      document.getElementById('vectorCompareShell').classList.remove('empty');
+      document.getElementById('vectorStage').classList.add('ready');
+      document.getElementById('vectorViewToggle').style.display = 'flex';
+      document.getElementById('vectorOriginal').innerHTML = `<img src="${url}" alt="Исходник">`;
+      setVectorView(vectorView);
+    }
+
+    function scheduleVectorize(immediate = false) {
+      if (!vectorSourceUrl) return;
+      clearTimeout(vectorTimer);
+      const delay = immediate ? 0 : 280;
+      vectorTimer = setTimeout(runVectorize, delay);
+    }
+
+    function runVectorize() {
+      if (!vectorSourceUrl || vectorBusy) return;
+      if (typeof ImageTracer === 'undefined') {
+        setVectorStatus('Библиотека трассировки не загружена');
+        return;
+      }
+
+      vectorBusy = true;
+      setVectorStatus('Трассировка…', true);
+
+      const img = new Image();
+      img.onload = () => {
+        try {
+          const maxSide = 1280;
+          let w = img.naturalWidth;
+          let h = img.naturalHeight;
+          const scale = Math.min(1, maxSide / Math.max(w, h));
+          w = Math.max(1, Math.round(w * scale));
+          h = Math.max(1, Math.round(h * scale));
+
+          const canvas = document.createElement('canvas');
+          canvas.width = w;
+          canvas.height = h;
+          const ctx = canvas.getContext('2d', { willReadFrequently: true });
+          ctx.drawImage(img, 0, 0, w, h);
+
+          const options = readVectorOptions();
+          let svg = ImageTracer.imagedataToSVG(ctx.getImageData(0, 0, w, h), options);
+          svg = svg.replace('<svg ', '<svg shape-rendering="geometricPrecision" ');
+          vectorSvg = svg;
+
+          document.getElementById('vectorSvgWrap').innerHTML = svg;
+          document.getElementById('vectorCode').textContent = svg;
+          setVectorButtons(true);
+          setVectorStatus(`Готово · ${w}×${h}px`);
+          if (vectorView === 'compare') updateCompareSlider(document.getElementById('vectorSlider').value);
+        } catch (err) {
+          setVectorStatus('Ошибка трассировки');
+          console.error(err);
+        } finally {
+          vectorBusy = false;
+        }
+      };
+      img.onerror = () => {
+        vectorBusy = false;
+        setVectorStatus('Не удалось прочитать изображение');
+      };
+      img.src = vectorSourceUrl;
+    }
+
+    async function copyVectorSvg() {
+      if (!vectorSvg) return;
+      await navigator.clipboard.writeText(vectorSvg);
+      showToast('SVG скопирован');
+    }
+
+    function downloadVector() {
+      if (!vectorSvg) return;
+      const blob = new Blob([vectorSvg], { type: 'image/svg+xml' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `${vectorSourceName}-vector.svg`;
+      a.click();
+      URL.revokeObjectURL(url);
+      showToast('SVG скачан');
+    }
+
+    const vectorDrop = document.getElementById('vectorDrop');
+    const vectorFile = document.getElementById('vectorFile');
+
+    vectorDrop.addEventListener('click', () => vectorFile.click());
+    vectorFile.addEventListener('change', e => {
+      const file = e.target.files && e.target.files[0];
+      if (file) loadImageFromFile(file);
+      e.target.value = '';
+    });
+
+    vectorDrop.addEventListener('dragover', e => {
+      e.preventDefault();
+      vectorDrop.classList.add('dragover');
+    });
+    vectorDrop.addEventListener('dragleave', () => vectorDrop.classList.remove('dragover'));
+    vectorDrop.addEventListener('drop', e => {
+      e.preventDefault();
+      vectorDrop.classList.remove('dragover');
+      const file = e.dataTransfer.files && e.dataTransfer.files[0];
+      if (file) loadImageFromFile(file);
+    });
+
+    document.addEventListener('paste', e => {
+      const vectorPanel = document.getElementById('panel-vector');
+      if (!vectorPanel.classList.contains('active')) return;
+      const items = e.clipboardData && e.clipboardData.items;
+      if (!items) return;
+      for (const item of items) {
+        if (item.type.startsWith('image/')) {
+          e.preventDefault();
+          const file = item.getAsFile();
+          if (file) {
+            vectorSourceName = 'pasted-image';
+            loadImageFromFile(file);
+          }
+          break;
+        }
+      }
+    });
+  </script>
+</body>
+</html>
