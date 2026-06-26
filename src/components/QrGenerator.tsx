@@ -13,10 +13,52 @@ import {
   Palette
 } from 'lucide-react';
 
+// @ts-ignore
+import telegramLogo from '../assets/telegram-logo.svg?raw';
+// @ts-ignore
+import vkLogo from '../assets/vk-logo.svg?raw';
+// @ts-ignore
+import odnoklassnikiLogo from '../assets/odnoklassniki-logo.svg?raw';
+// @ts-ignore
+import maxLogo from '../assets/Max_logo.svg?raw';
+// @ts-ignore
+import dzenLogo from '../assets/dzen-logo.svg?raw';
+
 type QrDataType = 'url' | 'text';
 type BodyStyle = 'square' | 'dots' | 'rounded' | 'stars';
 type OuterEyeStyle = 'square' | 'rounded' | 'circle';
 type InnerEyeStyle = 'square' | 'rounded' | 'circle';
+type QrLogoType = 'none' | 'telegram' | 'vk' | 'ok' | 'max' | 'zen';
+
+const prepareLogoSvg = (rawSvg: string, x: number, y: number, size: number, color: string) => {
+  if (!rawSvg) return '';
+  // Strip XML declarations and comments
+  let clean = rawSvg
+    .replace(/<\?xml[^>]*\?>/gi, '')
+    .replace(/<!DOCTYPE[^>]*>/gi, '')
+    .replace(/<!--[\s\S]*?-->/g, '')
+    .trim();
+
+  // Find the viewBox of the original SVG to preserve it
+  const viewBoxMatch = clean.match(/viewBox=["']([^"']+)["']/i);
+  const viewBox = viewBoxMatch ? viewBoxMatch[1] : '0 0 24 24';
+
+  // Find where the first `<svg` ends:
+  const firstSvgEnd = clean.indexOf('>');
+  if (firstSvgEnd !== -1) {
+    let bodyAndClosing = clean.slice(firstSvgEnd + 1);
+    
+    // Replace dark theme/default colors with QR color for styling flexibility
+    bodyAndClosing = bodyAndClosing
+      .replace(/#0a0b0b/gi, color)
+      .replace(/#202022/gi, color)
+      .replace(/#000000/gi, color);
+
+    // Wrap the inner elements in a group with fill color so un-styled paths are colored correctly
+    return `<svg x="${x}" y="${y}" width="${size}" height="${size}" viewBox="${viewBox}" xmlns="http://www.w3.org/2000/svg"><g fill="${color}">${bodyAndClosing}</g></svg>`;
+  }
+  return clean;
+};
 
 export default function QrGenerator() {
   const [dataType, setDataType] = useState<QrDataType>('url');
@@ -30,6 +72,7 @@ export default function QrGenerator() {
   const [outerEyeStyle, setOuterEyeStyle] = useState<OuterEyeStyle>('square');
   const [innerEyeStyle, setInnerEyeStyle] = useState<InnerEyeStyle>('square');
   const [errorCorrection, setErrorCorrection] = useState<'L' | 'M' | 'Q' | 'H'>('M');
+  const [centerLogo, setCenterLogo] = useState<QrLogoType>('none');
   const [fgColor, setFgColor] = useState<string>('#000000'); // Default color is black
 
   const [svgCode, setSvgCode] = useState<string>('');
@@ -62,6 +105,15 @@ export default function QrGenerator() {
       const margin = 2;
       const viewBoxSize = size + margin * 2;
 
+      // Center coordinates and mask check
+      const center = Math.floor(size / 2);
+      const hasLogo = centerLogo !== 'none';
+      const isCenterArea = (row: number, col: number) => {
+        if (!hasLogo) return false;
+        // 7x7 center mask for clean, larger logos with white safety backing
+        return row >= center - 3 && row <= center + 3 && col >= center - 3 && col <= center + 3;
+      };
+
       // Start building SVG elements
       const elements: string[] = [];
 
@@ -73,6 +125,9 @@ export default function QrGenerator() {
 
           // Skip rendering finder pattern area in the body loop (we will custom-draw the 3 eyes)
           if (isFinderPattern(r, c, size)) continue;
+
+          // Skip rendering center area if we have a logo
+          if (isCenterArea(r, c)) continue;
 
           // Adjust position for padding
           const x = c + margin;
@@ -119,6 +174,30 @@ export default function QrGenerator() {
       // Bottom-Left Eye
       renderEye(0, size - 7);
 
+      // Draw the center logo if specified
+      if (hasLogo) {
+        // Draw white backing rounded rect with high safety margins for superb contrast and scanning
+        const backingSize = 7;
+        const backingX = center - 3 + margin;
+        const backingY = center - 3 + margin;
+        elements.push(`<rect x="${backingX}" y="${backingY}" width="${backingSize}" height="${backingSize}" rx="1.6" fill="#FFFFFF" />`);
+
+        const logoSize = 5.2; // Beautifully larger logo
+        const offset = (backingSize - logoSize) / 2;
+        const lx = center - 3 + margin + offset;
+        const ly = center - 3 + margin + offset;
+
+        let logoRaw = '';
+        if (centerLogo === 'telegram') logoRaw = telegramLogo;
+        else if (centerLogo === 'vk') logoRaw = vkLogo;
+        else if (centerLogo === 'ok') logoRaw = odnoklassnikiLogo;
+        else if (centerLogo === 'max') logoRaw = maxLogo;
+        else if (centerLogo === 'zen') logoRaw = dzenLogo;
+
+        const logoSvg = prepareLogoSvg(logoRaw, lx, ly, logoSize, fgColor);
+        elements.push(logoSvg);
+      }
+
       // Wrap in standard scalable, transparent background SVG
       const rawSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${viewBoxSize} ${viewBoxSize}" width="100%" height="100%">
   <!-- Generated elegantly by параdiz -->
@@ -136,7 +215,7 @@ export default function QrGenerator() {
 
   useEffect(() => {
     generateStyledQrSvg();
-  }, [dataType, textVal, simpleText, bodyStyle, outerEyeStyle, innerEyeStyle, fgColor, errorCorrection]);
+  }, [dataType, textVal, simpleText, bodyStyle, outerEyeStyle, innerEyeStyle, fgColor, errorCorrection, centerLogo]);
 
   const downloadSvg = () => {
     if (!svgCode) return;
@@ -174,12 +253,12 @@ export default function QrGenerator() {
       
       {/* 1. COLUMN: Parameters & Customization */}
       <div className="bg-white rounded-[20px] p-4 pb-3.5 flex flex-col h-full min-h-0 shadow-xs">
-        <span className="text-[11px] font-bold text-[#A2AABD] uppercase tracking-widest block font-sans mb-2 flex-shrink-0">
+        <span className="text-[12px] font-bold text-[#A2AABD] uppercase tracking-widest block font-sans mb-3 flex-shrink-0">
           Данные и Стиль
         </span>
 
         {/* Scrollable parameters area */}
-        <div className="flex-1 overflow-y-auto pr-1 flex flex-col gap-2.5 scrollbar-hide">
+        <div className="flex-1 overflow-y-auto pr-1 flex flex-col gap-1.5 scrollbar-hide">
           
           {/* Tab Switch: Link vs text */}
           <div className="grid grid-cols-2 gap-1 p-1 bg-gray-50 rounded-lg border border-gray-100 shrink-0">
@@ -208,8 +287,8 @@ export default function QrGenerator() {
           </div>
 
           {/* Dynamic input field */}
-          <div className="p-2.5 bg-gray-50/50 border border-gray-100 rounded-xl flex flex-col gap-2">
-            <span className="text-[9px] font-extrabold text-[#A2AABD] uppercase tracking-wider block">
+          <div className="p-2 bg-gray-50/50 border border-gray-100 rounded-xl flex flex-col gap-1 shrink-0">
+            <span className="text-[10px] font-bold text-[#A2AABD] uppercase tracking-wider block font-sans">
               Содержимое QR-кода
             </span>
 
@@ -229,16 +308,15 @@ export default function QrGenerator() {
                   value={simpleText}
                   onChange={(e) => setSimpleText(e.target.value)}
                   placeholder="Введите любой текст..."
-                  rows={2}
-                  className="w-full p-2 rounded-lg border border-gray-200 text-xs text-black bg-white focus:border-[#30ABE9] focus:outline-none transition resize-none font-medium"
+                  className="w-full h-11 p-1.5 rounded-lg border border-gray-200 text-xs text-black bg-white focus:border-[#30ABE9] focus:outline-none transition resize-none font-medium leading-normal"
                 />
               </div>
             )}
           </div>
 
           {/* DOTS / BODY STYLES */}
-          <div className="p-2.5 bg-white border border-gray-100 rounded-xl flex flex-col gap-2">
-            <span className="text-[9px] font-extrabold text-[#A2AABD] uppercase tracking-wider block">
+          <div className="p-2 bg-white border border-gray-100 rounded-xl flex flex-col gap-1 shrink-0">
+            <span className="text-[10px] font-bold text-[#A2AABD] uppercase tracking-wider block font-sans">
               Стиль точек кода
             </span>
 
@@ -265,8 +343,8 @@ export default function QrGenerator() {
           </div>
 
           {/* EYE FRAME STYLE */}
-          <div className="p-2.5 bg-white border border-gray-100 rounded-xl flex flex-col gap-2">
-            <span className="text-[9px] font-extrabold text-[#A2AABD] uppercase tracking-wider block">
+          <div className="p-2 bg-white border border-gray-100 rounded-xl flex flex-col gap-1 shrink-0">
+            <span className="text-[10px] font-bold text-[#A2AABD] uppercase tracking-wider block font-sans">
               Внешний глазок
             </span>
 
@@ -292,8 +370,8 @@ export default function QrGenerator() {
           </div>
 
           {/* INNER EYE (PUPIL) STYLE */}
-          <div className="p-2.5 bg-white border border-gray-100 rounded-xl flex flex-col gap-2">
-            <span className="text-[9px] font-extrabold text-[#A2AABD] uppercase tracking-wider block">
+          <div className="p-2 bg-white border border-gray-100 rounded-xl flex flex-col gap-1 shrink-0">
+            <span className="text-[10px] font-bold text-[#A2AABD] uppercase tracking-wider block font-sans">
               Внутренний зрачок
             </span>
 
@@ -318,9 +396,47 @@ export default function QrGenerator() {
             </div>
           </div>
 
+          {/* CENTER LOGO */}
+          <div className="p-2 bg-white border border-gray-100 rounded-xl flex flex-col gap-1 shrink-0">
+            <span className="text-[10px] font-bold text-[#A2AABD] uppercase tracking-wider block font-sans">
+              Логотип в центре
+            </span>
+
+            <div className="grid grid-cols-2 gap-1">
+              {[
+                { id: 'none', label: 'Без логотипа' },
+                { id: 'telegram', label: 'Telegram' },
+                { id: 'vk', label: 'ВКонтакте' },
+                { id: 'ok', label: 'Одноклассники' },
+                { id: 'max', label: 'Макс' },
+                { id: 'zen', label: 'Яндекс.Дзен' }
+              ].map((logo) => (
+                <button
+                  key={logo.id}
+                  onClick={() => {
+                    setCenterLogo(logo.id as QrLogoType);
+                    if (logo.id !== 'none') {
+                      // Boost error correction level to Q or H automatically to guarantee flawless reading
+                      if (errorCorrection === 'L' || errorCorrection === 'M') {
+                        setErrorCorrection('Q');
+                      }
+                    }
+                  }}
+                  className={`py-1 px-1 rounded-md text-center font-bold text-[9.5px] border transition cursor-pointer ${
+                    centerLogo === logo.id
+                      ? 'bg-[#30ABE9]/10 border-[#30ABE9] text-[#30ABE9]'
+                      : 'bg-white border-gray-200 text-[#565C68] hover:bg-gray-50'
+                  }`}
+                >
+                  {logo.label}
+                </button>
+              ))}
+            </div>
+          </div>
+
           {/* QR COMPLEXITY (ERROR CORRECTION LEVEL) */}
-          <div className="p-2.5 bg-white border border-gray-100 rounded-xl flex flex-col gap-2">
-            <span className="text-[9px] font-extrabold text-[#A2AABD] uppercase tracking-wider block">
+          <div className="p-2 bg-white border border-gray-100 rounded-xl flex flex-col gap-1 shrink-0">
+            <span className="text-[10px] font-bold text-[#A2AABD] uppercase tracking-wider block font-sans">
               Сложность кода
             </span>
 
@@ -348,10 +464,10 @@ export default function QrGenerator() {
           </div>
 
           {/* COLOR PICKER */}
-          <div className="p-2.5 bg-white border border-gray-100 rounded-xl flex flex-col gap-2">
+          <div className="p-2 bg-white border border-gray-100 rounded-xl flex flex-col gap-1 shrink-0">
             <div className="flex items-center gap-1">
               <Palette size={11} className="text-[#30ABE9]" />
-              <span className="text-[9px] font-extrabold text-[#A2AABD] uppercase tracking-wider block">
+              <span className="text-[10px] font-bold text-[#A2AABD] uppercase tracking-wider block font-sans">
                 Цвет QR-кода
               </span>
             </div>
@@ -404,7 +520,7 @@ export default function QrGenerator() {
 
       {/* 2. COLUMN: Modern Center Preview */}
       <div className="bg-white rounded-[20px] p-4 pb-3.5 flex flex-col h-full min-h-0 shadow-xs">
-        <span className="text-[11px] font-bold text-[#A2AABD] uppercase tracking-widest block font-sans mb-2 flex-shrink-0">
+        <span className="text-[12px] font-bold text-[#A2AABD] uppercase tracking-widest block font-sans mb-3 flex-shrink-0">
           Окно превью
         </span>
 
@@ -413,7 +529,7 @@ export default function QrGenerator() {
           {svgCode ? (
             <div className="w-56 h-56 md:w-72 md:h-72 flex flex-col items-center justify-center hover:scale-[1.03] transition duration-300 relative">
               <div 
-                className="w-full h-full object-contain flex items-center justify-center drop-shadow-sm"
+                className="w-full h-full object-contain flex items-center justify-center"
                 dangerouslySetInnerHTML={{ __html: svgCode }}
               />
             </div>
@@ -435,7 +551,7 @@ export default function QrGenerator() {
 
       {/* 3. COLUMN: SVG code panel */}
       <div className="bg-white rounded-[20px] p-4 pb-3.5 flex flex-col h-full min-h-0 shadow-xs">
-        <span className="text-[11px] font-bold text-[#A2AABD] uppercase tracking-widest block font-sans mb-2 flex-shrink-0">
+        <span className="text-[12px] font-bold text-[#A2AABD] uppercase tracking-widest block font-sans mb-3 flex-shrink-0">
           svg-код
         </span>
 
