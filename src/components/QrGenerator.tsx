@@ -43,19 +43,37 @@ const prepareLogoSvg = (rawSvg: string, x: number, y: number, size: number, colo
   const viewBoxMatch = clean.match(/viewBox=["']([^"']+)["']/i);
   const viewBox = viewBoxMatch ? viewBoxMatch[1] : '0 0 24 24';
 
-  // Find where the first `<svg` ends:
+  // Parse viewBox coordinates to calculate perfect uniform scaling and centering (preserveAspectRatio meet)
+  const parts = viewBox.split(/[\s,]+/).map(Number);
+  const vx = parts[0] || 0;
+  const vy = parts[1] || 0;
+  const vw = parts[2] || 24;
+  const vh = parts[3] || 24;
+
+  const vw_safe = (vw && !isNaN(vw)) ? vw : 24;
+  const vh_safe = (vh && !isNaN(vh)) ? vh : 24;
+
+  const scale = Math.min(size / vw_safe, size / vh_safe);
+  const dx = (size - (vw_safe * scale)) / 2;
+  const dy = (size - (vh_safe * scale)) / 2;
+
+  const tx = x + dx - (vx * scale);
+  const ty = y + dy - (vy * scale);
+
+  // Extract the inner elements of the SVG to prevent nested <svg> tags which break Adobe Illustrator
   const firstSvgEnd = clean.indexOf('>');
-  if (firstSvgEnd !== -1) {
-    let bodyAndClosing = clean.slice(firstSvgEnd + 1);
+  const lastSvgStart = clean.lastIndexOf('</svg>');
+  if (firstSvgEnd !== -1 && lastSvgStart !== -1) {
+    let innerContent = clean.slice(firstSvgEnd + 1, lastSvgStart).trim();
     
-    // Replace dark theme/default colors with QR color for styling flexibility
-    bodyAndClosing = bodyAndClosing
+    // Replace default dark/logo colors with target QR color for styling flexibility
+    innerContent = innerContent
       .replace(/#0a0b0b/gi, color)
       .replace(/#202022/gi, color)
       .replace(/#000000/gi, color);
 
-    // Wrap the inner elements in a group with fill color so un-styled paths are colored correctly
-    return `<svg x="${x}" y="${y}" width="${size}" height="${size}" viewBox="${viewBox}" xmlns="http://www.w3.org/2000/svg"><g fill="${color}">${bodyAndClosing}</g></svg>`;
+    // Return a clean transformed group that is 100% compatible with Illustrator and all vector editors
+    return `<g transform="translate(${tx.toFixed(4)}, ${ty.toFixed(4)}) scale(${scale.toFixed(6)})" fill="${color}">${innerContent}</g>`;
   }
   return clean;
 };
@@ -198,8 +216,8 @@ export default function QrGenerator() {
         elements.push(logoSvg);
       }
 
-      // Wrap in standard scalable, transparent background SVG
-      const rawSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${viewBoxSize} ${viewBoxSize}" width="100%" height="100%">
+      // Wrap in standard scalable, transparent background SVG (version 1.1 + physical size for maximum Adobe Illustrator compatibility)
+      const rawSvg = `<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 ${viewBoxSize} ${viewBoxSize}" width="512" height="512" style="max-width: 100%; max-height: 100%;">
   <!-- Generated elegantly by параdiz -->
   <g>
     ${elements.join('\n    ')}
