@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Copy, RefreshCw, Type, Download, Trash2 } from 'lucide-react';
-import SaveToDriveButton from './SaveToDriveButton';
 
 type RegMode = 'upper' | 'lower' | 'title' | 'invert' | 'sentence' | 'kebab' | 'snake' | 'camel';
 
@@ -226,14 +225,6 @@ export default function CaseConverter() {
             >
               Скачать TXT файл
             </button>
-
-            <SaveToDriveButton 
-              filename={`converted-text-${activeReg}.txt`}
-              content={outputText}
-              mimeType="text/plain"
-              className="py-1.5 px-4 rounded-lg text-[11px]"
-              buttonText="Сохранить на Диск"
-            />
           </div>
         )}
       </div>

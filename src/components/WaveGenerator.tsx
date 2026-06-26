@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Sliders, Download, Copy, Sparkles, Compass, Dices } from 'lucide-react';
 import { rgbToCmyk, hexToRgb } from '../lib/colorUtils';
-import SaveToDriveButton from './SaveToDriveButton';
 
 export default function WaveGenerator() {
   const [curveType, setCurveType] = useState<'wave' | 'step' | 'peak'>('wave');
@@ -301,12 +300,6 @@ export default function WaveGenerator() {
           >
             Скачать SVG
           </button>
-          <SaveToDriveButton 
-            filename={`wave-${curveType}-${complexity}.svg`}
-            content={svgCode}
-            mimeType="image/svg+xml"
-            className="w-full py-2.5 rounded-xl text-xs"
-          />
         </div>
       </div>
 

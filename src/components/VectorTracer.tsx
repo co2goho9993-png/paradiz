@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Sliders, Copy, Download, Upload, Eye, Sparkles, RefreshCw } from 'lucide-react';
-import SaveToDriveButton from './SaveToDriveButton';
 
 // Import the local Javascript ImageTracer to execute on the client side
 import ImageTracerLib from '../lib/imagetracer.js';
@@ -473,14 +472,6 @@ export default function VectorTracer() {
           >
             Скачать SVG
           </button>
-          {tracedSvg && !busy && (
-            <SaveToDriveButton 
-              filename={`${fileName}-tracer.svg`}
-              content={tracedSvg}
-              mimeType="image/svg+xml"
-              className="w-full py-2.5 rounded-xl text-xs"
-            />
-          )}
         </div>
       </div>
 

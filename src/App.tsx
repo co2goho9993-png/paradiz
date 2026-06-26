@@ -1,16 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { 
-  Workflow, 
-  Sparkles, 
-  Paintbrush, 
-  Type, 
-  Flame,
-  Cloud,
-  LogOut
-} from 'lucide-react';
-import { User } from 'firebase/auth';
-import { initAuth, googleSignIn, logout } from './lib/googleDrive';
 
 // Components
 import VectorTracer from './components/VectorTracer';
@@ -19,44 +8,12 @@ import WaveGenerator from './components/WaveGenerator';
 import ColorTools from './components/ColorTools';
 import ChartGenerator from './components/ChartGenerator';
 import CaseConverter from './components/CaseConverter';
+import QrGenerator from './components/QrGenerator';
 
 import { TabType } from './types';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<TabType>('vector');
-  const [user, setUser] = useState<User | null>(null);
-  const [isLoggingIn, setIsLoggingIn] = useState(false);
-
-  useEffect(() => {
-    const unsubscribe = initAuth(
-      (u) => {
-        setUser(u);
-      },
-      () => {
-        setUser(null);
-      }
-    );
-    return () => unsubscribe();
-  }, []);
-
-  const handleLogin = async () => {
-    setIsLoggingIn(true);
-    try {
-      const res = await googleSignIn();
-      if (res) {
-        setUser(res.user);
-      }
-    } catch (err) {
-      console.error(err);
-    } finally {
-      setIsLoggingIn(false);
-    }
-  };
-
-  const handleLogout = async () => {
-    await logout();
-    setUser(null);
-  };
 
   const tabLabels: { id: TabType; label: string }[] = [
     { id: 'vector', label: 'Трассировка' },
@@ -65,6 +22,7 @@ export default function App() {
     { id: 'color', label: 'Цвета' },
     { id: 'chart', label: 'Диаграммы' },
     { id: 'case', label: 'Регистры' },
+    { id: 'qr', label: 'QR-коды' },
   ];
 
   return (
@@ -92,7 +50,7 @@ export default function App() {
             </span>
           </div>
 
-          {/* Navigation Links and Auth */}
+          {/* Navigation Links */}
           <div className="flex items-center gap-[10px] lg:gap-[20px]">
             <div className="hidden md:flex items-center gap-[6px] lg:gap-[10px]">
               {tabLabels.map((tab) => {
@@ -111,43 +69,6 @@ export default function App() {
                   </button>
                 );
               })}
-            </div>
-
-            {/* Google Drive Auth Indicator */}
-            <div className="flex items-center">
-              {user ? (
-                <div className="flex items-center gap-2 pl-3 border-l border-gray-200 h-8">
-                  <img 
-                    src={user.photoURL || 'https://lh3.googleusercontent.com/d/1Cb8jGwCXUf7IF3VmO8m2FFrXizBMLwn1'} 
-                    alt="Google Avatar" 
-                    className="w-7 h-7 rounded-full border border-gray-100 object-cover"
-                    referrerPolicy="no-referrer"
-                  />
-                  <div className="hidden lg:flex flex-col text-left">
-                    <span className="text-xs font-bold text-gray-800 leading-tight truncate max-w-[100px]">{user.displayName || 'Пользователь'}</span>
-                    <span className="text-[10px] text-emerald-500 font-semibold leading-tight flex items-center gap-0.5">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                      Диск активен
-                    </span>
-                  </div>
-                  <button 
-                    onClick={handleLogout}
-                    className="text-gray-400 hover:text-red-500 p-1.5 rounded-lg hover:bg-red-50 transition cursor-pointer"
-                    title="Выйти"
-                  >
-                    <LogOut className="w-3.5 h-3.5" />
-                  </button>
-                </div>
-              ) : (
-                <button
-                  onClick={handleLogin}
-                  disabled={isLoggingIn}
-                  className="h-[32px] px-3 rounded-[10px] text-xs font-extrabold text-[#30ABE9] bg-[#30ABE9]/10 hover:bg-[#30ABE9]/15 border border-[#30ABE9]/20 transition-all duration-200 cursor-pointer flex items-center gap-1.5"
-                >
-                  <Cloud className="w-3.5 h-3.5 shrink-0" />
-                  <span>{isLoggingIn ? 'Вход...' : 'Google Диск'}</span>
-                </button>
-              )}
             </div>
           </div>
 
@@ -193,6 +114,7 @@ export default function App() {
               {activeTab === 'color' && <ColorTools />}
               {activeTab === 'chart' && <ChartGenerator />}
               {activeTab === 'case' && <CaseConverter />}
+              {activeTab === 'qr' && <QrGenerator />}
             </div>
           </motion.div>
         </AnimatePresence>

@@ -14,7 +14,6 @@ import {
   Grid,
   ChevronDown
 } from 'lucide-react';
-import SaveToDriveButton from './SaveToDriveButton';
 
 interface ChartCategory {
   id: string;
@@ -821,13 +820,7 @@ ${segments}
             <Download className="w-4 h-4" />
             Скачать .svg
           </button>
-          <SaveToDriveButton 
-            filename={`paradiz-${chartType}-chart.svg`}
-            content={svgCode}
-            mimeType="image/svg+xml"
-            className="h-[42px] rounded-xl text-xs"
-            buttonText="На Диск"
-          />
+
         </div>
       </div>
 

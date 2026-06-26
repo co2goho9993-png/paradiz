@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Palette, Eye, Copy, Code, Sliders, ShieldCheck } from 'lucide-react';
-import SaveToDriveButton from './SaveToDriveButton';
 import {
   hexToRgb,
   rgbToHex,
@@ -435,14 +434,6 @@ export default function ColorTools() {
             >
               Копировать CSS токены
             </button>
-
-            <SaveToDriveButton 
-              filename={`palette-${hexVal.replace('#', '')}.svg`}
-              content={generatedSvg}
-              mimeType="image/svg+xml"
-              className="w-full py-2.5 rounded-xl text-xs"
-              buttonText="Сохранить палитру на Диск"
-            />
           </div>
         </div>
       </div>

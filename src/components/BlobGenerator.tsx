@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Sliders, RefreshCw, Copy, Download, Sparkles, Dices } from 'lucide-react';
 import { rgbToCmyk, hexToRgb } from '../lib/colorUtils';
-import SaveToDriveButton from './SaveToDriveButton';
 
 export default function BlobGenerator() {
   const [edges, setEdges] = useState<number>(8);
@@ -234,12 +233,6 @@ export default function BlobGenerator() {
           >
             Скачать SVG
           </button>
-          <SaveToDriveButton 
-            filename={`blob-${seed}.svg`}
-            content={svgCode}
-            mimeType="image/svg+xml"
-            className="w-full py-2.5 rounded-xl text-xs"
-          />
         </div>
       </div>
 

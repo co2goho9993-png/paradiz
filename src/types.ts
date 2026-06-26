@@ -1,4 +1,4 @@
-export type TabType = 'vector' | 'blob' | 'wave' | 'color' | 'chart' | 'case';
+export type TabType = 'vector' | 'blob' | 'wave' | 'color' | 'chart' | 'case' | 'qr';
 
 export interface GridConfig {
   columns: number;
