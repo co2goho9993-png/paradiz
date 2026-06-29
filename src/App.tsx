@@ -9,6 +9,7 @@ import ColorTools from './components/ColorTools';
 import ChartGenerator from './components/ChartGenerator';
 import CaseConverter from './components/CaseConverter';
 import QrGenerator from './components/QrGenerator';
+import ClassesEditor from './components/ClassesEditor';
 
 import { TabType } from './types';
 
@@ -23,6 +24,7 @@ export default function App() {
     { id: 'chart', label: 'Диаграммы' },
     { id: 'case', label: 'Регистры' },
     { id: 'qr', label: 'QR-коды' },
+    { id: 'classes', label: 'Классы' },
   ];
 
   return (
@@ -115,6 +117,7 @@ export default function App() {
               {activeTab === 'chart' && <ChartGenerator />}
               {activeTab === 'case' && <CaseConverter />}
               {activeTab === 'qr' && <QrGenerator />}
+              {activeTab === 'classes' && <ClassesEditor />}
             </div>
           </motion.div>
         </AnimatePresence>

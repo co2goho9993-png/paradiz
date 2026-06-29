@@ -1,4 +1,39 @@
-export type TabType = 'vector' | 'blob' | 'wave' | 'color' | 'chart' | 'case' | 'qr';
+export type TabType = 'vector' | 'blob' | 'wave' | 'color' | 'chart' | 'case' | 'qr' | 'classes';
+
+export interface RoomConfig {
+  w: number; // width in meters
+  d: number; // depth/length in meters
+  h: number; // height in meters
+}
+
+export interface OpeningConfig {
+  id: number;
+  type: 'window' | 'door';
+  width: number;
+  height: number;
+  sill: number;
+  offset: number;
+  rotation: number; // 0 or 90
+}
+
+export interface WallConfig {
+  texture: HTMLImageElement | null;
+  textureSrc?: string; // base64 or URL
+  openings: OpeningConfig[];
+}
+
+export interface DragState {
+  type: 'pan' | 'rotate' | 'opening';
+  sx: number;
+  sy: number;
+  px?: number;
+  py?: number;
+  lastX?: number;
+  lastY?: number;
+  wall?: number;
+  opening?: OpeningConfig;
+  startOffset?: number;
+}
 
 export interface GridConfig {
   columns: number;
