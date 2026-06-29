@@ -150,15 +150,7 @@ export default function ClassesEditor() {
   }
 
   function getWallSegment3d(wallIdx: number, currentRoom = room) {
-    const hw = currentRoom.w / 2;
-    const hd = currentRoom.d / 2;
-    const segs = [
-      { x1: -hw, y1: -hd, x2: hw, y2: -hd, wall: 0, horiz: true },
-      { x1: -hw, y1: hd, x2: -hw, y2: -hd, wall: 1, horiz: false },
-      { x1: hw, y1: hd, x2: -hw, y2: hd, wall: 2, horiz: true },
-      { x1: hw, y1: -hd, x2: hw, y2: hd, wall: 3, horiz: false }
-    ];
-    return segs.find(s => s.wall === wallIdx) || segs[0];
+    return getWallSegment(wallIdx, currentRoom);
   }
 
   function hitTestWall(wx: number, wy: number, customZoom = zoom, currentRoom = room) {
@@ -197,10 +189,10 @@ export default function ClassesEditor() {
 
   function getWallDefs3d(hw: number, hd: number, h: number) {
     return [
-      { wallIdx: 0, corners: [[-hw, -hd, 0], [hw, -hd, 0], [hw, -hd, h], [-hw, -hd, h]] },
-      { wallIdx: 1, corners: [[-hw, hd, 0], [-hw, -hd, 0], [-hw, -hd, h], [-hw, hd, h]] },
-      { wallIdx: 2, corners: [[hw, hd, 0], [-hw, hd, 0], [-hw, hd, h], [hw, hd, h]] },
-      { wallIdx: 3, corners: [[hw, -hd, 0], [hw, hd, 0], [hw, hd, h], [hw, -hd, h]] }
+      { wallIdx: 0, corners: [[-hw, -hd, 0], [hw, -hd, 0], [hw, -hd, h], [-hw, -hd, h]] }, // North
+      { wallIdx: 1, corners: [[hw, -hd, 0], [hw, hd, 0], [hw, hd, h], [hw, -hd, h]] },   // East
+      { wallIdx: 2, corners: [[hw, hd, 0], [-hw, hd, 0], [-hw, hd, h], [hw, hd, h]] },   // South
+      { wallIdx: 3, corners: [[-hw, hd, 0], [-hw, -hd, 0], [-hw, -hd, h], [-hw, hd, h]] } // West
     ];
   }
 
@@ -243,10 +235,10 @@ export default function ClassesEditor() {
 
     const viewDir = { x: Math.sin(currentRot3d), y: Math.cos(currentRot3d) };
     const innerNormals = [
-      { x: 0, y: 1 },
-      { x: 1, y: 0 },
-      { x: 0, y: -1 },
-      { x: -1, y: 0 }
+      { x: 0, y: 1 },    // Wall 0 (North, y = -hd) -> faces South (+y)
+      { x: -1, y: 0 },   // Wall 1 (East, x = hw) -> faces West (-x)
+      { x: 0, y: -1 },   // Wall 2 (South, y = hd) -> faces North (-y)
+      { x: 1, y: 0 }     // Wall 3 (West, x = -hw) -> faces East (+x)
     ];
     const n = innerNormals[wallIdx];
     if (!n) return true;
@@ -285,10 +277,10 @@ export default function ClassesEditor() {
     if (currentProj3d === 'perspective') {
       const depth = Math.max(2.5, PROJ3D_CONFIG.camDist + y2);
       const k = (PROJ3D_CONFIG.focal * currentZoom) / depth;
-      sx = x2 * k;
+      sx = -x2 * k;
       sy = -z2 * k;
     } else {
-      sx = x2 * currentZoom;
+      sx = -x2 * currentZoom;
       sy = (y2 * 0.45 + z2 * 0.55) * currentZoom;
     }
     return worldToScreen(sx, sy, width, height, 1, currentPanX, currentPanY);
@@ -1199,7 +1191,7 @@ export default function ClassesEditor() {
       
       withQuadMap(ctx, p, isExport, exportUiScale, (w, h, bCtx) => {
         bCtx.globalAlpha = 0.9;
-        bCtx.transform(-1, 0, 0, -1, w, h);
+        bCtx.transform(1, 0, 0, -1, 0, h);
         bCtx.drawImage(img, crop.x, crop.y, crop.w, crop.h, 0, 0, w, h);
         bCtx.globalAlpha = 1;
       });
@@ -1492,7 +1484,7 @@ export default function ClassesEditor() {
       setPanX((drag.px || 0) + (px - drag.sx));
       setPanY((drag.py || 0) + (py - drag.sy));
     } else if (drag.type === 'rotate') {
-      setRot3d(prev => prev + (px - (drag.lastX || 0)) * 0.01);
+      setRot3d(prev => prev - (px - (drag.lastX || 0)) * 0.01);
       setTilt3d(prev => clampTilt(prev + (py - (drag.lastY || 0)) * 0.008));
       drag.lastX = px;
       drag.lastY = py;
